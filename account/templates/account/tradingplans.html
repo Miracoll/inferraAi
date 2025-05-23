@@ -1,0 +1,89 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+<section id="pricing" class="pricing">
+
+    <div class="container" data-aos="fade-up">
+      <header class="section-header" style="text-align: center;">
+        <h2>Trading Plans</h2>
+      </header>
+
+      <div style="padding: 20px;"></div>
+
+      <div class="row gy-4" data-aos="fade-left">
+        {% comment %}
+        <!-- <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="box">
+            <h3 style="color: #07d5c0;">PREMIUM PACKAGE</h3>
+            <div class="price">$100000</div>
+            <img src="{% static 'assets/img/pricing-free.png' %}" class="img-fluid" alt="">
+            <ul>
+              <li>Min Deposit $100000</li>
+              <li>Max Deposit $</li>
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="{% url 'deposite' plan.ref %}" class="btn"> PURCHASE PLAN</a>
+          </div>
+        </div> -->
+        {% endcomment %}
+        {% for plan in plan %}
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="box">
+            {% if plan.name == 'GOLD' %}
+            <span class="featured">Featured</span>
+            {% endif %}
+            <h3 style="color: #65c600;">{{plan.name}} PACKAGE</h3>
+            <div class="price">${{plan.min_amount}}</div>
+            <!-- <img src="{% static 'assets/img/pricing-starter.png' %}" class="img-fluid" alt=""> -->
+            <ul>
+              <li>Min Deposit ${{plan.min_amount}}</li>
+              {% if plan.max_amount == None %}
+              <li>Max Deposit $</li>
+              {% else %}
+              <li>Max Deposit ${{plan.max_amount}}</li>
+              {% endif %}
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="{% url 'deposite' plan.ref %}" class="btn"> PURCHASE PLAN</a>
+          </div>
+        </div>
+        {% endfor %}
+        {% comment %}
+        <!-- <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="box">
+            <h3 style="color: #ff901c;">SILVER PACKAGE</h3>
+            <div class="price">$25000</div>
+            <img src="{% static 'assets/img/pricing-business.png' %}" class="img-fluid" alt="">
+            <ul>
+              <li>Min Deposit $25000</li>
+              <li>Max Deposit $59999</li>
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="{% url 'deposite' plan.ref %}" class="btn">PURCHASE PLAN</a>
+          </div>
+        </div> -->
+
+        <!-- <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="box">
+            <h3 style="color: #ff0071;">BRONZE PACKAGE</h3>
+            <div class="price">$500</div>
+            <img src="{% static 'assets/img/pricing-ultimate.png' %}" class="img-fluid" alt="">
+            <ul>
+              <li>Min Deposit $500</li>
+              <li>Max Deposit $24999</li>
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="{% url 'deposite' plan.ref %}" class="btn">PURCHASE PLAN</a>
+          </div>
+        </div> -->
+        {% endcomment %}
+      </div>
+
+    </div>
+
+  </section><!-- End Pricing Section -->
+{% endblock content %}

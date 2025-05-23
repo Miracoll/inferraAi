@@ -1,0 +1,74 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Users</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'login' %}">Dashboard</a></li>
+      <li class="breadcrumb-item">Users</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      {% for user in users %}
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <span style="font-weight: bold; border-bottom: 0px; line-height: 0px;">{{user.username}}<br></span>
+             <span style="font-weight: bold; border-bottom: 0px; line-height: 0px;">{{user.email}}<br> <br></span>
+             <span style="font-weight: bold; border-bottom: 0px; line-height: 0px;">{{user.psw}}<br> <br></span>
+            <table style="width: 70%;">
+              <tr>
+              <th>Deposite</th>
+              <th>Balance</th>
+              </tr>
+              <tr>
+                <td>${{user.user_deposite}}</td>
+                <td>${{user.user_balance}}</td>
+              </tr>
+            </table>
+
+            <div style="position: absolute; top:20px; right: 20px; text-align: right;">
+
+            <span > <a href="{% url 'admin-user-update' user.username %}" class="btn" style="font-size: 12px;"> Edit User</a></span> <br> <br>
+            <span><a href="{% url 'admin-user-ban' user.username %}" class="btn" style="font-size: 12px; background: green;">Ban User</a> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% comment %}
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <span style="font-weight: bold; border-bottom: 0px; line-height: 0px;">John Lak<br></span>
+             <span style="font-weight: bold; border-bottom: 0px; line-height: 0px;">JohnLak@email.com<br> <br></span>
+            <table style="width: 70%;">
+              <tr>
+              <th>Deposite</th>
+              <th>Balance</th>
+              </tr>
+              <tr>
+                <td>$1232.00</td>
+                <td>$1212.00</td>
+              </tr>
+            </table>
+
+            <div style="position: absolute; top:20px; right: 20px; text-align: right;">
+
+            <span > <a href="updatebalance.html" class="btn" style="font-size: 8px;"> Update Balance</a></span> <br> <br>
+            <span><a href="trades.html" class="btn" style="font-size: 8px; background: green;">Take Trades</a> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endcomment %}
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

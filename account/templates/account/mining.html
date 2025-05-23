@@ -1,0 +1,251 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- <div class="pagetitle">
+      <h1>Trading</h1>
+    </div> -->
+
+    <section class="section dashboard">
+      <div>
+      <div class="row">
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- Sales Card -->
+            <div class="col-xxl-4">
+              <div class="card info-card sales-card" style="background-image: url({% static 'assets/img/Gradient.webp' %}); background-size: cover; background-repeat: no-repeat; background-position: bottom;">
+                <div class="card-body" >
+                  <div style="margin-bottom: 5px;border-radius: 7px; color: white;">
+                    <div class="row " style="padding-top: 15px; ">                      
+                      <h2 class="white-text" style="margin: 0px; font-size: 35px;">$0.00</h2><br><br><br><br>
+                    </div>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End Sales Card -->
+
+
+
+            <div class="row center ">
+              <div class="col l6 s6" style="padding-right: 0px;">
+                <a class="btn btn-full " href="{% url 'buy-contract' %}">BUY CONTRACT</a>
+              </div>
+                <div class="col l6 s6" style="padding-left: 0px;">
+                  <a class="btn btn-full" href="{% url 'contract' %}">MY CONTRACTS</a>
+                </div>
+            </div>
+          
+
+
+
+          <div>
+            <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div id="tradingview_3e2"></div><div class="tradingview-widget-copyright"></div><div style="height: 150px; margin-bottom: 5px;"><div style="width: 100%; height: 100%;"><style>
+  .tradingview-widget-copyright {
+    font-size: 13px !important;
+    line-height: 32px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    /* @mixin sf-pro-display-font; */
+    font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+    color: #9db2bd !important;
+  }
+
+  .tradingview-widget-copyright .blue-text {
+    color: #2962FF !important;
+  }
+
+  .tradingview-widget-copyright a {
+    text-decoration: none !important;
+    color: #9db2bd !important;
+  }
+
+  .tradingview-widget-copyright a:visited {
+    color: #9db2bd !important;
+  }
+
+  .tradingview-widget-copyright a:hover .blue-text {
+    color: #1E53E5 !important;
+  }
+
+  .tradingview-widget-copyright a:active .blue-text {
+    color: #1848CC !important;
+  }
+
+  .tradingview-widget-copyright a:visited .blue-text {
+    color: #2962FF !important;
+  }
+  </style><iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22BTCUSD%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22dateRange%22%3A%221d%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22autosize%22%3Atrue%2C%22largeChartUrl%22%3A%22%22%2C%22utm_source%22%3A%22chasetrades.net%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22mini-symbol-overview%22%2C%22page-uri%22%3A%22chasetrades.net%2Fuser%2F/%22%7D" style="box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe></div></div></div>
+          </div>
+
+          <div>
+           <div class="hide-on-med-and-down">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div id="tradingview_3e2"></div><div class="tradingview-widget-copyright"></div>
+                <div style="height: 150px; margin-bottom: 5px;"><div style="width: 100%; height: 100%;"><style>
+  .tradingview-widget-copyright {
+    font-size: 13px !important;
+    line-height: 32px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    /* @mixin sf-pro-display-font; */
+    font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+    color: #9db2bd !important;
+  }
+
+  .tradingview-widget-copyright .blue-text {
+    color: #2962FF !important;
+  }
+
+  .tradingview-widget-copyright a {
+    text-decoration: none !important;
+    color: #9db2bd !important;
+  }
+
+  .tradingview-widget-copyright a:visited {
+    color: #9db2bd !important;
+  }
+
+  .tradingview-widget-copyright a:hover .blue-text {
+    color: #1E53E5 !important;
+  }
+
+  .tradingview-widget-copyright a:active .blue-text {
+    color: #1848CC !important;
+  }
+
+  .tradingview-widget-copyright a:visited .blue-text {
+    color: #2962FF !important;
+  }
+  </style><iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22ETHUSD%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22dateRange%22%3A%221d%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22autosize%22%3Atrue%2C%22largeChartUrl%22%3A%22%22%2C%22utm_source%22%3A%22chasetrades.net%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22mini-symbol-overview%22%2C%22page-uri%22%3A%22chasetrades.net%2Fuser%2F/%22%7D" style="box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe></div></div></div></div>
+          </div>
+
+        </div><!-- End Right side columns -->
+
+          <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">        
+
+            <div class="col-xxl-4 col-xl-12" >
+              <div class="card over" style="margin-bottom: 0px;">
+                <div class="card-body" style="color:#9e9e9e;">
+                  <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                      <img src="{% static 'assets/img/pair-icon-btcusd.img.svg' %}" style="max-height: 40px; border-radius: 10px;">                      
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="" style="margin-left: 0px;">0.000000 BTC<br> <span class="grey-text">$0.00</span></div>
+                    </div>
+
+                    <div style="flex: 0.7 1 9%; " >
+                      <span class="grey-text" style="position: absolute;"> GH/s</span><br>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-4 col-xl-12" >
+              <div class="card over" style="margin-bottom: 0px;">
+                <div class="card-body" style="color:#9e9e9e;">
+                  <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                      <img src="{% static 'assets/img/pair-icon-ethusd.img.svg' %}" style="max-height: 40px; border-radius: 10px;">                      
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="" style="margin-left: 0px;">0.000000 ETH<br> <span class="grey-text">$0.00</span></div>
+                    </div>
+
+                    <div style="flex: 0.7 1 9%; " >
+                      <span class="grey-text" style="position: absolute;"> GH/s</span><br>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-xxl-4 col-xl-12" >
+              <div class="card over" style="margin-bottom: 0px;">
+                <div class="card-body" style="color:#9e9e9e;">
+                  <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                      <img src="{% static 'assets/img/pair-icon-bnbusd.img.svg' %}" style="max-height: 40px; border-radius: 10px;">                      
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="" style="margin-left: 0px;">0.000000 BNB<br> <span class="grey-text">$0.00</span></div>
+                    </div>
+
+                    <div style="flex: 0.7 1 9%; " >
+                      <span class="grey-text" style="position: absolute;">0 GH/s</span><br>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             <div class="col-xxl-4 col-xl-12" >
+              <div class="card over" style="margin-bottom: 0px;">
+                <div class="card-body" style="color:#9e9e9e;">
+                  <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                      <img src="{% static 'assets/img/pair-icon-dogeusd.img.svg' %}" style="max-height: 40px; border-radius: 10px;">                      
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="" style="margin-left: 0px;">0.000000 DOGE<br> <span class="grey-text">$0.00</span></div>
+                    </div>
+
+                    <div style="flex: 0.7 1 9%; " >
+                      <span class="grey-text" style="position: absolute;"> GH/s</span><br>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+             <div class="col-xxl-4 col-xl-12" >
+              <div class="card over" style="margin-bottom: 0px;">
+                <div class="card-body" style="color:#9e9e9e;">
+                  <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                      <img src="{% static 'assets/img/pair-icon-atomusd.img.svg' %}" style="max-height: 40px; border-radius: 10px;">                      
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="" style="margin-left: 0px;">0.000000 ATOM<br> <span class="grey-text">$0.00</span></div>
+                    </div>
+
+                    <div style="flex: 0.7 1 9%; " >
+                      <span class="grey-text" style="position: absolute;"> GH/s</span><br>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          
+              
+
+            </div>
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        </div>
+      </div>
+    </section>
+{% endblock content %}

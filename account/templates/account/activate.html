@@ -1,0 +1,66 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+<body style="margin:0px; font-family: 'Signika Negative', Arial, sans-serif;">
+
+    <div class="container" style=" padding: 20px; background: #f1f1f1; width: 100%; ">
+        <div style="text-align: center;">
+             <img src="{% static 'assets/img/logo.png' %}" width="100px"> 
+        <h1 style="font-weight: 800; color:#fc5a3f;">CHASETRADES</h1>
+        </div>
+        
+        <div class="content" style="padding-left: 40px; padding-right: 40px; background: #fff;">
+            <div class="header" style="text-align: center;">
+               
+                <h2 style="font-weight: 600;  padding-top: 20px;">Verify To Get Started</h2>
+            </div>
+    		<br>
+        <div>
+    
+            <p style="font-weight: 600; font-size:20px; color: #000;">Welcome, {{ user }} </p>
+    
+    
+            <p style="cursor: auto;color: #000;font-size: 15px;line-height: 24px;text-align: left;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px"> 
+            You're only one step away from completing your account registration and enabling your copy trades.
+            </p>
+    
+            <p style="cursor: auto;color: #000;font-size: 16px;line-height: 24px;text-align: left;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px"> 
+            The emaill address we have on file is "{{email}}" 
+            </p>
+    
+            <p style="cursor: auto;color: #000;font-size: 16px;line-height: 24px;text-align: left;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px">
+            Please verify your email to activate your account.
+            </P>
+    
+        </div>
+    
+    
+            <div style="text-align: center; padding: 20px; padding-top: 30px; padding-bottom: 30px;">
+    
+            <a style="text-decoration: none; background-color: #2d71a1; color: white; border-radius: 5px; padding: 15px 30px !important; background:#fc5a3f; " href="http://{{domain}}{% url 'activate' uidb64=uid token=token %}" >VERIFY</a>
+            </div>
+            
+            <div style="padding: 5px;">
+                <hr>
+            </div>
+    
+            <div style="text-align:center; padding-bottom: 10px; cursor: auto; color: #747F8D; font-size: 13px; line-height: 16px; text-align: left; padding: 10px;">
+                <p>
+                Need help? Contact our support team or hit us up on Twitter @discord.<br>
+                Want to give us feedback? Let us know what you think on our feedback site. 
+                </p>
+                
+            </div>
+        </div>
+    
+    
+        <div class="footer" style="color: #99AAB5; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size: 12px; line-height: 24px; text-align: center;">
+            <div style="padding: 20px;">
+            Sent by ChaseTrades • @chasetrades
+            </div>
+        </div>
+    
+    </div>
+    
+</body>    
+{% endblock content %}

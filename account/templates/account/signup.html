@@ -1,0 +1,94 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+<center>
+    <h2>Sign Up</h2>
+  </center>
+  <div style="padding:10px;"></div>
+  
+  <center>
+           <!-- Customers Card -->
+              <div class="col-xxl-4 col-xl-6">
+  
+              <div class="card">
+              <div class="card-body">
+  
+                <!-- Floating Labels Form -->
+                <form class="row g-3" style="padding: 50px;" method="post">
+                  {% csrf_token %}
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="username" id="floatingName" placeholder="Your Name">
+                      <label for="floatingName" style="color:#777777;">Username</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="email" id="floatingName" placeholder="Your Name">
+                      <label for="floatingName" style="color:#777777;">Email</label>
+                    </div>
+                  </div>
+  
+                   <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="password" class="form-control" name="pass1" id="floatingName" placeholder="Your Name">
+                      <label for="floatingName" style="color:#777777;">Password</label>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="password" class="form-control" name="pass2" id="floatingName" placeholder="Your Name">
+                      <label for="floatingName" style="color:#777777;">Confirm Password</label>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="first-name" id="floatingName" placeholder="Your Name">
+                      <label for="floatingName" style="color:#777777;">First Name</label>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="last-name" id="floatingName" placeholder="Your Name">
+                      <label for="floatingName" style="color:#777777;">Last Name</label>
+                    </div>
+                  </div>
+  
+                   <div class="col-md-12">
+                    <div class="form-floating mb-3">
+                      <select class="form-select" name="currency" id="floatingSelect" aria-label="State">
+                         <option value="USD" selected="">USD</option>
+                          <option value="GBP"> GBP</option>
+                          <option value="EUR"> EUR</option>
+                          <option value="AUD"> AUD</option>
+                      </select>
+                      <label for="floatingSelect">Currency</label>
+                    </div>
+                  </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label" for="gridCheck">
+                      I accept that I am 18 years or older and accept Terms &amp; Conditions and Privacy Policy
+                    </label>
+                  </div>
+                </div>
+  
+  
+                 <div>
+                  <button type="submit" class="btn" style="width:100%">Sign Up</button>
+                 </div>
+                  
+                 <p class="center">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                 
+                </form><!-- End floating Labels Form -->
+  
+              </div>
+            </div>
+  
+              </center>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Trading Plans</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'admin-home' %}">Dashboard</a></li>
+      <li class="breadcrumb-item">Plans</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<div>
+  <div>
+
+    
+    <center>
+     <!-- Customers Card -->
+        <div class="col-xxl-4 col-xl-10">
+          <br>
+
+          <h4 class="center">Plans</h4>
+          
+          <br>
+
+        <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+            <div class="card-body ">
+              <a href="{% url 'admin-list-trading-plan' %}" style="color: #26a69a;">Trading Plans</a>
+            </div>
+          </div>
+
+          <div class="card info-card customers-card over" >
+
+            <div class="card-body ">
+              <a href="{% url 'admin-list-mining-plan' %}" style="color:#26a69a;">Minning Plans</a>
+            </div>
+          </div>
+
+        </center>
+  </div>
+</div>
+{% endblock content %}

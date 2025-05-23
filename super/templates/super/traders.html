@@ -1,0 +1,87 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Traders</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'admin-home' %}">Dashboard</a></li>
+      <li class="breadcrumb-item">Traders</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Traders List</h5>
+        
+
+          <!-- Table with stripped rows -->
+          <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+            
+          <div class="datatable-container" style="overflow-x:auto;">
+
+            <table class="table datatable datatable-table">
+              <thead>
+                <tr>
+                  <th data-sortable="true" style="width: ;">
+                    <a href="#" class="datatable-sorter"></a>
+                  </th>
+                  <th data-sortable="true" style="width: 26.234567901234566%;">
+                    <a href="#" class="datatable-sorter">Name</a>
+                  </th>
+                  <th data-sortable="true" style="width: 29.938271604938272%;">
+                    <a href="#" class="datatable-sorter">Wins</a>
+                  </th>
+                  <th data-sortable="true" style="width: 15.432098765432098%;">
+                    <a href="#" class="datatable-sorter">Looses</a>
+                  </th>
+                  <th data-sortable="true" style="width: 15.432098765432098%;">
+                    <a href="#" class="datatable-sorter">WinRate</a>
+                  </th>
+                  <th data-sortable="true" aria-sort="descending" class="datatable-descending" style="width: ;">
+                    <a href="#" class="datatable-sorter">Profit Share</a>
+                  </th>
+                   <th data-sortable="true" aria-sort="descending" class="datatable-descending" style="width: ;">
+                    <a href="#" class="datatable-sorter">Followers</a>
+                  </th>
+                  <th></th>
+
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for trader in traders %}
+                <tr data-index="0">
+                  <th scope="row"><a href="#"><img src="{{trader.image.url}}" style="width:50px;height: 50px; border-radius:50%;"  alt=""></a></th>
+                  <td>{{trader.name}}</td>
+                  <td>{{trader.win}}</td>
+                  <td>{{trader.loss}}</td>
+                  <td>{{trader.win_rate}}</td>
+                  <td>{{trader.profit}}</td>
+                  <td>{{trader.followers}}</td>
+                  <td><a href="{% url 'admin-update-trader' trader.ref %}" style="color: green;"><i class="bi bi-pencil-square"></i></a></td>                      
+                  <td><a href="{% url 'admin-delete-trader' trader.ref %}" style="color: red;"><i class="bi bi-x-square"></i></a> </td>
+                </tr>
+                {% endfor %}
+                
+                it is a data table, please pay attention to the "data-index", in <tr> 
+
+              </tbody>
+            </table>
+          </div>
+          <div class="datatable-bottom">
+              <nav class="datatable-pagination"><ul class="datatable-pagination-list"></ul></nav>
+          </div></div>
+          <!-- End Table with stripped rows -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

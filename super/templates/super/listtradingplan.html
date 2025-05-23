@@ -1,0 +1,35 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<section class="section dashboard mt-5">
+    <div class="row">
+        <div class="col-sm-12 col-8-lg">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>TRADING PLANS</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Min Amount</th>
+                            <th>Max Amount</th>
+                            <th></th>
+                        </tr>
+                        
+                        {% for plan in plan %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{plan.name}}</td>
+                            <td>{{plan.min_amount}}</td>
+                            <td>{{plan.max_amount}}</td>
+                            <td><a href="{% url 'admin-trading-plan' plan.ref %}" style="color: green;"><i class="bi bi-pencil-square"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<section>
+{% endblock content %}

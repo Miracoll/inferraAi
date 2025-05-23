@@ -1,0 +1,134 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+<center>
+    <div>
+      <div class="fade-appear-done fade-enter-done" style="text-align: left;">
+        <div class="">
+          <div class="row">
+    
+    
+            <div class="col-xxl-4 col-xl-6" style="padding-top: 30px;">
+              <center><img src="{% static 'assets/img/camera.png' %}" class="circle" height="150px">
+                <h2>{{user.last_name}} {{user.first_name}}</h2><p>{{user.email}}</p>
+              </center>
+              <ul class="collection" style="list-style-type: none;">
+    
+                <a class="collection-item bg" href="{% url 'refferals' %}"><li>
+                  <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                    <div class="card-body over">
+                      <div style="padding: 1rem 1rem 0.8rem; background: rgb(225, 85, 93); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                    <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">groups</span>
+                  </div>
+                  <span style="color: rgb(38, 166, 154);">Refferals</span>
+                  </div>
+                </div> 
+                </li>
+              </a>
+    
+              <a class="collection-item bg" href="">
+                <li>
+                  <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                    <div class="card-body over">
+                      <div style="padding: 1rem 1rem 0.8rem; background: rgb(255, 135, 0); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                        <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">star</span>
+                      </div>
+                      <span style="color: rgb(38, 166, 154);">Watch List</span>
+                    </div>
+                  </div> 
+                </li>
+              </a>
+    
+    
+              <a class="collection-item bg" href="{% url 'selectwithdrawal' %}">
+                <li>
+                  <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                    <div class="card-body over">
+                      <div style="padding: 1rem 1rem 0.8rem; background: rgb(181, 72, 198); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                          <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">payments</span>
+                      </div>
+                      <span style="color: rgb(38, 166, 154);">Withdrawals</span>
+                    </div> 
+                  </div>
+                </li>
+              </a>
+            </ul>
+          </div>
+    
+            <div class="col l5 s12"><br><br>
+              <ul class="collection" style="list-style-type:none;">
+                <a class="collection-item bg" href="{% url 'logout' %}">
+                  <li>
+                    <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                      <div class="card-body over">                  
+                        <div style="padding: 1rem 1rem 0.8rem; background: rgb(50, 167, 226); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                          <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">logout</span>
+                        </div>
+                        <span style="color: rgb(38, 166, 154);">Logout</span>
+                      </div> 
+                    </div>
+                  </li>
+                </a>
+    
+    
+                <a class="collection-item bg" href="{% url 'updateemail' %}">
+                  <li>
+                    <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                      <div class="card-body over">                  
+                        <div style="padding: 1rem 1rem 0.8rem; background: rgb(255, 135, 0); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                          <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">mail</span>
+                        </div>
+                         <span style="color: rgb(38, 166, 154);">Update Email</span>
+                      </div> 
+                    </div>
+                  </li>
+                </a>
+    
+                <a class="collection-item bg" href="{% url 'updatephoto' %}">
+                  <li>
+                    <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                      <div class="card-body over">                  
+                         <div style="padding: 1rem 1rem 0.8rem; background: rgb(181, 72, 198); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                          <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">account_circle</span> </div>
+                        <span style="color: rgb(38, 166, 154);">Update Photo</span>
+                      </div> 
+                    </div>               
+                  </li>
+                </a>
+    
+               
+    
+    
+                <a class="collection-item bg" href="{% url 'updatepassword' %}">
+                  <li>
+                    <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                      <div class="card-body over">                  
+                        <div style="padding: 1rem 1rem 0.8rem; background: rgb(50, 167, 226); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                          <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">lock</span>
+                        </div><span style="color: rgb(38, 166, 154);">Update Password</span>
+                      </div> 
+                    </div>
+                  </li>
+                </a>
+    
+    
+                <a class="collection-item bg" href="{% url 'settings' %}">
+                  <li>
+                    <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
+                      <div class="card-body over">                  
+                        <div style="padding: 1rem 1rem 0.8rem; background: rgb(181, 72, 198); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                          <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">settings</span>
+                        </div><span style="color: rgb(38, 166, 154);">Account Settings</span>
+                      </div> 
+                    </div>
+                  </li>
+                </a>
+              </ul>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</center>
+{% endblock content %}

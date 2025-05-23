@@ -1,0 +1,77 @@
+{% extends 'account/main.html' %}
+{% block content %}
+    <div>
+      <div>
+
+        
+        <center>
+         <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-4">
+            <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+
+            <div>
+              <p>SEND ${{plan.amount}} WORTH OF {{plan.payment_method.abbr}}</p>
+              <p>TO THE WALLET ADDRESS BELOW OR SCAN THE QR CODE WITH YOUR WALLET APP</p>
+              <p style="margin-bottom: 5px;">please send only {{plan.payment_method.currency}} to this address, sending any other token may result in permanent loss</p>
+
+              <div class="input-field"><i class="material-icons prefix">content_copy</i><input type="text" value="{{plan.payment_method.address}}" style="text-align: center;"></div>
+
+              <div><img src="{{plan.payment_method.qrcode.url}}" width="120" height="120" alt="{{plan.address}}"></div>
+
+              <br>
+              <br>
+              <div id="timer">
+                
+              </div>
+              <!-- <div id="final-box">{{plan.date_created|date:"M d, Y H:m:s"}}</div> -->
+              <div id="event-box">
+                <p>Awaiting Payment</p>
+                <div>Payment expires {{plan.expire_time|date:"M d, Y H:m:s"}}</div>
+              </div>
+              <!-- <div id="countdown-box">
+                <div class="spinner-border"></div>
+              </div> -->
+              
+              <!-- <script type="text/javascript">
+var timeoutHandle;
+function countdown(minutes) {
+    var seconds = 60;
+    var mins = minutes
+    function tick() {
+        var counter = document.getElementById("timer");
+        var current_minutes = mins-1
+        seconds--;
+        counter.innerHTML =
+            current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if( seconds > 0 ) {
+            timeoutHandle=setTimeout(tick, 1000);
+        } else {
+            if(mins > 1){
+                
+                setTimeout(function () { countdown(mins - 1); }, 1000); }
+        }
+    }
+    tick();
+}
+countdown('<?php echo $time; ?>');
+</script> -->
+              <form action="" method="post">
+                {% csrf_token %}
+                <button class="btn">UPLOAD PAYMENT PROOF</button>
+              </form>
+              
+              <br>
+              <br>
+              <a class="btn btn-secondary" href="{% url 'depositelist' %}">WAIT FOR CONFIRMATION</a>
+
+            </div>
+
+            </div>
+          </div>
+
+            </center>
+      </div>
+    </div>
+{% endblock content %}

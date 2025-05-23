@@ -1,0 +1,35 @@
+{% extends 'account/main.html' %}
+{% block content %}
+    <div>
+      <div>
+
+        
+        <center>
+         <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-6">
+              <br>
+
+              <h4 class="center">SELECT PAYMENT METHOD</h4>
+              
+              <br>
+
+            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+                <div class="card-body" style="padding: 30px;">
+                  <a href="{% url 'crypto' %}" style="font-weight: bold;" >Bitcoin</a>
+                </div>
+              </div>
+              
+              {% for pay in pay %}
+              <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+                <div class="card-body" style="padding: 30px;">
+                  <a href="{% url 'contract-payment' pay.name %}" style="font-weight: bold;">{{pay.name}}</a>
+                </div>
+              </div>
+              {% endfor %}
+
+            </center>
+      </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<section>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">GET COINS NOW</button>
+    </form>
+</section>
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+<center>
+    <h2>CREATE ADMIN</h2>
+  </center>
+  <div style="padding:10px;"></div>
+  
+  <center>
+           <!-- Customers Card -->
+              <div class="col-xxl-4 col-xl-6">
+  
+              <div class="card">
+              <div class="card-body">
+  
+                <!-- Floating Labels Form -->
+                <form class="row g-3" style="padding: 50px;" method="post">
+                {% csrf_token %}
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" name="username" id="floatingName" placeholder="Username">
+                        <label for="floatingName" style="color:#777777;">Username</label>
+                    </div>
+                    </div>
+  
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="email" id="floatingName" placeholder="Email">
+                      <label for="floatingName" style="color:#777777;">Email</label>
+                    </div>
+                  </div>
+  
+                   <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="password" id="floatingName" placeholder="Password">
+                      <label for="floatingName" style="color:#777777;">Password</label>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="first-name" id="floatingName" placeholder="First Name">
+                      <label for="floatingName" style="color:#777777;">First Name</label>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" name="last-name" id="floatingName" placeholder="Last Name">
+                      <label for="floatingName" style="color:#777777;">Last Name</label>
+                    </div>
+                  </div>
+  
+  
+                 <div>
+                  <button type="submit" class="btn" style="width:100%">Create Admin</button>
+                 </div>
+                 
+                </form><!-- End floating Labels Form -->
+  
+              </div>
+            </div>
+  
+              </center>
+{% endblock content %}

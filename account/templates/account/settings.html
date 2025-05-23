@@ -1,0 +1,69 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<center>
+    <div class="col-xxl-4 col-xl-7" style="padding-top: 30px;">
+    
+    
+      <div class="fade-appear-done fade-enter-done">
+        <div class="row">
+          <div class="col l6 s12 offset-l3">
+            <ul class="collection" style="list-style-type: none;">
+    
+    
+              <a class="collection-item bg" href="{% url 'profile' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px; text-align: left;">
+                        <div class="card-body over">                  
+                          <div style="padding: 1rem 1rem 0.8rem; background: rgb(50, 167, 226); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                    <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">person</span>
+                          </div>
+                          <span style="color: rgb(38, 166, 154);">My Profile</span> <span style="color: silver; font-size: 12px;"></span>
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+               <a class="collection-item bg" href="{% url 'notification' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px; text-align: left;">
+                        <div class="card-body over"> 
+                  <div style="padding: 1rem 1rem 0.8rem; background: rgb(225, 85, 93); border-radius: 10px; display: inline-block; margin-right: 1rem;"><span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">notifications</span>
+                          </div>
+                          <span style="color: rgb(38, 166, 154);">Notifications</span> <span style="color: silver; font-size: 12px;"></span>
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+               <a class="collection-item bg" href="{% url 'updateaddress' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px;text-align: left; ">
+                        <div class="card-body over">
+                    <div style="padding: 1rem 1rem 0.8rem; background: rgb(34, 176, 125); border-radius: 10px; display: inline-block; margin-right: 1rem;"><span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">home</span>
+                          </div>
+                          <span style="color: rgb(38, 166, 154);">Update Address</span> <span style="color: silver; font-size: 12px;"></span>
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+              <a class="collection-item bg" href="{% url 'verification' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px;text-align: left; ">
+                        <div class="card-body over">
+                          <div style="padding: 1rem 1rem 0.8rem; background: rgb(82, 82, 152); border-radius: 10px; display: inline-block; margin-right: 1rem;"><span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">verified_user</span>
+                          </div>
+                          <span style="color: rgb(38, 166, 154);">Account Verification</span> <span style="color: silver; font-size: 12px;"></span>
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </center>
+{% endblock content %}

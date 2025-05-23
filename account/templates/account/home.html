@@ -1,0 +1,325 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% load multiply %}
+{% block content %}
+<section class="section dashboard">
+    <div>
+    <div class="row">
+
+      <!-- Right side columns -->
+      <div class="col-lg-4">
+
+        <!-- Sales Card -->
+          <div class="col-xxl-12 ">
+            <div class="card info-card sales-card" style="background-image: url({% static 'assets/img/Background1.png' %}); background-size: cover; background-repeat: no-repeat; background-position: bottom;">
+              <div class="card-body" >
+                
+
+                <div style="margin-bottom: 5px;border-radius: 7px; color: white;">
+                  <div class="row center" style="padding-top: 15px; text-align: center;">
+                    <div class="col l6 s6">
+                      <h3 class="white-text">${{user.user_balance}}</h3><small>BALANCE</small>
+                    </div>
+                    <div class="col l6 s6"><h3 class="white-text">${{user.user_deposite}}</h3><small>DEPOSIT</small></div>
+                  </div><br><br>
+                  <center>
+                    <progress value="1" max="100" style="width: 98%; display: block; margin-top: 4px;"></progress>
+                    <small>SIGNAL STRENGTH</small>
+                  </center>
+                </div>
+
+
+                
+              </div>
+            </div>
+          </div><!-- End Sales Card -->
+
+
+
+          <div class="row center ">
+            <div class="col l6 s6" style="padding-right: 0px;">
+              <a class="btn btn-full " href="{% url 'crypto' %}">ADD FUNDS</a>
+            </div>
+              <div class="col l6 s6" style="padding-left: 0px;">
+                <a class="btn btn-full" href="{% url 'traders' %}">MY TRADERS ({{trade}})</a>
+              </div>
+          </div>
+        
+
+
+
+        <div>
+          <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div id="tradingview_3e2"></div><div class="tradingview-widget-copyright"></div><div style="height: 150px; margin-bottom: 5px;"><div style="width: 100%; height: 100%;"><style>
+.tradingview-widget-copyright {
+  font-size: 13px !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  /* @mixin sf-pro-display-font; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+  color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright .blue-text {
+  color: #2962FF !important;
+}
+
+.tradingview-widget-copyright a {
+  text-decoration: none !important;
+  color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright a:visited {
+  color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright a:hover .blue-text {
+  color: #1E53E5 !important;
+}
+
+.tradingview-widget-copyright a:active .blue-text {
+  color: #1848CC !important;
+}
+
+.tradingview-widget-copyright a:visited .blue-text {
+  color: #2962FF !important;
+}
+</style><iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22BTCUSD%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22dateRange%22%3A%221d%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22autosize%22%3Atrue%2C%22largeChartUrl%22%3A%22%22%2C%22utm_source%22%3A%22chasetrades.net%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22mini-symbol-overview%22%2C%22page-uri%22%3A%22chasetrades.net%2Fuser%2F/%22%7D" style="box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe></div></div></div>
+        </div>
+
+        <div>
+         <div class="hide-on-med-and-down">
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <div id="tradingview_3e2"></div><div class="tradingview-widget-copyright"></div>
+              <div style="height: 150px; margin-bottom: 5px;"><div style="width: 100%; height: 100%;"><style>
+.tradingview-widget-copyright {
+  font-size: 13px !important;
+  line-height: 32px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  /* @mixin sf-pro-display-font; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+  color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright .blue-text {
+  color: #2962FF !important;
+}
+
+.tradingview-widget-copyright a {
+  text-decoration: none !important;
+  color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright a:visited {
+  color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright a:hover .blue-text {
+  color: #1E53E5 !important;
+}
+
+.tradingview-widget-copyright a:active .blue-text {
+  color: #1848CC !important;
+}
+
+.tradingview-widget-copyright a:visited .blue-text {
+  color: #2962FF !important;
+}
+</style><iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22ETHUSD%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22dateRange%22%3A%221d%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22autosize%22%3Atrue%2C%22largeChartUrl%22%3A%22%22%2C%22utm_source%22%3A%22chasetrades.net%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22mini-symbol-overview%22%2C%22page-uri%22%3A%22chasetrades.net%2Fuser%2F/%22%7D" style="box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe></div></div></div></div>
+        </div>
+
+      </div><!-- End Right side columns -->
+
+        <!-- Left side columns -->
+      <div class="col-lg-8">
+        <div class="row">        
+
+          <!-- <div class="col l8 s12" style="max-height: 75vh; overflow-y: scroll;">
+            <section>
+              <center>
+                <ul class="tabs bg">
+                  <li class="tab col s6">
+                    <a href="#closed" class="">
+                      <span class="material-icons notranslate">hourglass_bottom</span><span>Closed</span>
+                    </a>
+                  </li>
+                  <li class="tab col s6">
+                    <a href="#open" class="active">
+                      <span class="material-icons notranslate">hourglass_top</span><span>Open</span>
+                    </a>
+                  </li>
+                  <li class="indicator" style="left: 297px; right: 0px;"></li></ul>
+                </center>
+
+        
+              </section>
+          </div> -->
+
+
+
+          <div style="max-height: 75vh; overflow-y: scroll;">
+            <!-- Bordered Tabs Justified -->
+            <div  class="tag bg" >
+
+              <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+              <li class="nav-item flex-fill" role="presentation">
+                <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true"> <span class="material-icons notranslate">hourglass_bottom</span><span>Closed</span></button>
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><span class="material-icons notranslate">hourglass_top</span><span>Open</span></button>
+              </li>
+              </ul>
+            </div>
+            
+
+              <div style="padding:20px;"></div>
+              <p class="text-danger">Refresh your browser to see recent balance (for closed trade)</p>
+
+             <div class="card" style="padding:20px;">
+              <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
+                  {% if not close %}
+                  <p style="text-align: center;"><span class="app-font-normal">NO CLOSED TRADES</span></p>
+                  {% else %}
+                  {% for close in close %}
+                  <div class="app-flex " style="align-items: center;">
+                    
+
+                    <div style="flex: 0.8 0 0%;">
+                      <span>{{ close.date_created|date:"M" }}</span><br>
+                      <span>{{ close.date_created|date:"d" }}</span>
+                    </div>
+
+                    <div style="flex: 0.8 1 0%;">
+                      <div class="col-sm-2">
+                        <center>
+                            {% if close.crypto.type != 'stock' %}
+                          <img class="cryptoicons" src="{{close.crypto.image}}" width="50" height="50" style="border-radius: 5px;">
+                          {% else %}
+                          <img class="cryptoicons" src="{{close.crypto.stock_image.url}}" width="50" height="50" style="border-radius: 5px;">
+                          {% endif %}
+                        </center>
+                      </div>                     
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="">
+                        {% if close.mode == 'buy' %}
+                        <p>
+                            {% if close.crypto.type != 'stock' %}
+                            {{close.crypto.symbol|upper}}{{user.currency|upper}}
+                            {% else %}
+                            {{close.crypto.name|upper}}
+                            {% endif %}
+                            <span style="color:green;">{{close.mode|upper}}</span> </p>
+                        {% else %}
+                        <p>{{close.crypto.symbol|upper}}{{user.currency|upper}} <span style="color:red;">{{close.mode|upper}}</span> </p>
+                        {% endif %}
+                        <span style="font-size: 12px;">{{close.trader.name}} Trades</span>
+                      </div>
+                    </div>
+
+                    
+                    <div style="margin-top: -46px;">
+                      {% if close.profit < 0 %}
+                      <span style="color:red;">-${{close.profit|multiply:-1}}</span>
+                      {% else %}
+                      <span style="color:green;">${{close.profit}}</span>
+                      {% endif %}
+                    </div>
+
+                  </div><hr>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+
+                <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+                  {% if not open %}
+                  <p style="text-align: center;"><span class="app-font-normal">NO OPENED TRADES</span></p>
+                  {% else %}
+                  {% for open in open %}
+                  <div class="app-flex " style="align-items: center;">
+                    
+
+                    <div style="flex: 0.8 0 0%;">
+                      <span>{{ open.date_created|date:"M" }}</span><br>
+                      <span>{{ open.date_created|date:"d" }}</span>
+                    </div>
+
+                    <div style="flex: 0.8 1 0%;">
+                      <div class="col-sm-2">
+                        <center>
+                            {% if open.crypto.type != 'stock' %}
+                          <img class="cryptoicons" src="{{open.crypto.image}}" width="50" height="50" style="border-radius: 5px;">
+                          {% else %}
+                          <img class="cryptoicons" src="{{open.crypto.stock_image.url}}" width="50" height="50" style="border-radius: 5px;">
+                          {% endif %}
+                        </center>
+                      </div>                     
+                    </div>
+
+                    <div style="flex: 7 1 0%;  padding-left: 20px;">
+                      <div class="">
+                        {% if open.mode == 'buy' %}
+                        <p>
+                            {% if open.crypto.type != 'stock' %}
+                            {{open.crypto.symbol|upper}}{{user.currency|upper}}
+                            {% else %}
+                            {{open.crypto.name|upper}}
+                            {% endif %}
+                             <span style="color:green;">{{open.mode|upper}}</span> </p>
+                        {% else %}
+                        <p>{{open.crypto.symbol|upper}}{{user.currency|upper}} <span style="color:red;">{{open.mode|upper}}</span> </p>
+                        {% endif %}
+                        <span style="font-size: 12px;">{{open.trader.name}} Trades</span>
+                      </div>
+                    </div>
+
+                    
+                    <div style="margin-top: -46px;">
+                      {% if open.profit < 0 %}
+                      <span style="color:red;">-${{open.profit|multiply:-1}}</span>
+                      {% else %}
+                      <span style="color:green;">${{open.profit}}</span>
+                      {% endif %}
+                    </div>
+
+                  </div><hr>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div><!-- End Bordered Tabs Justified -->
+             </div>
+            
+
+          </div>
+
+        </div>
+      </div><!-- End Left side columns -->
+
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+{% block footer %}
+<footer id="footer" class="footer" style="text-align:center;position: fixed;bottom: 0;width: 100%;">
+
+    <div class="fixed-footer mobile-bg">
+      <ul class="tabs">
+        <li class="tab col s2">
+          <a class="active" href=""><span class="material-icons notranslate" style="font-size: 30px;">bar_chart</span><span class="hide-on-med-and-down">Trading</span></a>
+        </li>
+        <li class="tab col s2"><a class="" href="{% url 'market' %}"><span class="material-icons notranslate" style="font-size: 30px;">store</span><span class="hide-on-med-and-down">Markets</span></a>
+        </li>
+        <li class="tab col s2"><a class="" href="{% url 'mining' %}"><span class="material-icons notranslate" style="font-size: 30px;">memory</span><span class="hide-on-med-and-down">Mining</span></a>
+        </li>
+        <li class="tab col s2"><a class="" href="{% url 'depositelist' %}"><span class="material-icons notranslate" style="font-size: 30px;">savings</span><span class="hide-on-med-and-down">Deposits</span></a>
+        </li>
+        <li class="tab col s2"><a class="" href="{% url 'account' %}"><span class="material-icons notranslate" style="font-size: 30px;">person</span><span class="hide-on-med-and-down">Account</span></a>
+        </li>
+      </ul>
+    </div>
+</footer><!-- End Footer -->
+{% endblock footer %}

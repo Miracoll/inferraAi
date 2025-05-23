@@ -1,0 +1,495 @@
+{% extends 'super/main.html' %}
+{% load static %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Users</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'admin-home' %}">Dashboard</a></li>
+      <li class="breadcrumb-item">Users</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+
+ <section class="section dashboard">
+  <div class="row">
+
+    <!-- Left side columns -->
+    <div class="col-lg-8">
+      <div class="row">
+
+                
+         <div class="col-xxl-4 col-md-6 col-sm-12">
+          <div class="card info-card sales-card" style="background-image: url({% static 'assets/img/Background1.png' %}); background-size: cover; background-repeat: no-repeat; background-position: bottom;">
+            <div class="card-body" >
+              
+              <div style="text-align: center;">
+                 <h3 class="white-text">{{client.first_name}} {{client.last_name}}</h3>
+              </div>
+               
+              <div style="margin-bottom: 5px;border-radius: 7px; color: white;">
+                <div class="row center" style="padding-top: 15px; text-align: center;">
+                  <div class="col l6 s6">
+                    <h3 class="white-text">${{client.user_balance}}</h3><small>BALANCE</small>
+                  </div>
+                  <div class="col l6 s6"><h3 class="white-text">${{client.user_deposite}}</h3><small>DEPOSIT</small></div>
+                </div><br>
+
+                <button class="btn btn-full" data-bs-toggle="modal" data-bs-target="#verticalycentered">Update Payment</button>
+                
+              </div>                  
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xxl-4 col-md-6 col-sm-12">
+          <div class="card info-card sales-card">
+            <div class="card-body" >
+              
+              <div style="text-align: left;">
+                 
+                  <div class="form-group">
+                    {% if client.verify_email %}
+                    <input type="checkbox" checked name="email" id="" disabled>
+                    {% else %}
+                    <input type="checkbox" name="email" id="" disabled>
+                    {% endif %}
+                    <label for="">Email verification</label>
+                  </div>
+
+                  <div class="form-group">
+                    {% if client.verify_identity %}
+                    <span class="text-muted">Identity verified</span>
+                    {% else %}
+                    <button class="btn btn-full my-1" data-bs-toggle="modal" data-bs-target="#verifyidentity">Verify identity</button>
+                    <div class="modal fade" id="verifyidentity" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Verify identity</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h2 class="text-muted">Are you sure you want to verify this user identity?</h2>
+                          </div>
+                          <div class="modal-footer">
+                            <form action="" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-full w-100" name="verify-identity" type="submit">Verify identity</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div><!-- End Vertically centered Modal-->
+                    {% endif %}
+                  </div>
+
+                  
+                 
+                  <div class="form-group">
+                    {% if client.verify_address %}
+                    <span class="text-muted">Address verified</span>
+                    {% else %}
+                    <button class="btn btn-full my-1" data-bs-toggle="modal" data-bs-target="#verifyaddress">Verify address</button>
+                    <div class="modal fade" id="verifyaddress" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Verify address</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h2 class="text-muted">Are you sure you want to verify this user address?</h2>
+                          </div>
+                          <div class="modal-footer">
+                            <form action="" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-full w-100" name="verify-address" type="submit">Verify address</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div><!-- End Vertically centered Modal-->
+                    
+                    {% endif %}
+                  </div>
+              </div>
+               
+              <div style="margin-bottom: 5px;border-radius: 7px; color: white;">
+
+                
+                <button class="btn btn-full my-1" data-bs-toggle="modal" data-bs-target="#verticalycenteredv">View identity photo</button>
+                <button class="btn btn-full my-1" data-bs-toggle="modal" data-bs-target="#verticalycentereda">View address</button>
+
+                
+              </div>                  
+            </div>
+          </div>
+        </div>
+
+          <div class="modal fade" id="verticalycentered" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Update Balance</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="row g-3" method="post">
+                    {% csrf_token %}
+
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="number" class="form-control" required id="floatingName" placeholder="Deposite" name="deposite" value="{{client.user_deposite}}">
+                <label for="floatingName">Deposite</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="number" class="form-control" required id="floatingEmail" placeholder="Balance" name="balance">
+                <label for="floatingEmail">Balance</label>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" name="updatebalance" class="btn btn-primary">Update Payment</button>
+            </div>
+          </form>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- End Vertically centered Modal-->
+
+          <div class="modal fade" id="verticalycentereda" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">View Address</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-striped">
+                
+                    <tr>
+                      <td style="padding: 15px;">STREET ADDRESS</td>
+                      <td style="padding: 15px;">  {{client.street_address}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 15px;">POST CODE</td>
+                      <td style="padding: 15px;">{{client.post_code}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 15px;">CITY</td>
+                      <td style="padding: 15px;">{{client.city}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 15px;">STATE</td>
+                      <td style="padding: 15px;">{{client.state}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 15px;">COUNTRY</td>
+                      <td style="padding: 15px;">{{client.country}}</td>
+                    </tr>
+                  
+                </table>
+                <hr>
+                <p>Address image</p>
+                <img src="{{client.address_image.url}}" width="100%" height="200px" alt="">
+                </div>
+
+              </div>
+            </div>
+          </div><!-- End Vertically centered Modal-->
+
+          <div class="modal fade" id="verticalycenteredv" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Identity verification</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Front image</p>
+                  <img src="{{client.identity_front_image.url}}" width="100%" height="200px" alt=""> <br>
+                  <hr>
+                  <p>Back image</p>
+                  <img src="{{client.identity_back_image.url}}" width="100%" height="200px" alt=""> <br>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- End Vertically centered Modal-->
+
+
+          <div class="card">
+            <div class="card-body">
+
+              <h5 class="card-title">Copied Traders({{len}})</h5>
+
+              <!-- Floating Labels Form -->
+              <div class="datatable-container" style="overflow-x:auto;">
+
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th></th>
+                    <th scope="col">Trader</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for t in trader %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <th scope="row"><a href="#"><img src="{{t.trade.image.url}}" style="width:50px;height: 50px; border-radius:50%;"  alt=""></a></th>
+                    <td>{{t.trade.name}}</td>
+                    <td><a href="{% url 'admin-cancel-trade' t.ref %}">Cancel</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+            </div>
+
+            </div>
+          </div>
+          
+
+        <!-- Recent Sales -->
+        <div class="col-12">
+          <div class="card recent-sales overflow-auto">
+
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Trade History <span>| Today</span></h5>
+
+              <table class="table table-borderless datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Comodity</th>
+                    <th scope="col">Mode</th>
+                    <th scope="col">Profit</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in taketrade %}
+                  <tr>
+                    <th scope="row"><a href="#">#{{forloop.counter}}</a></th>
+                    <td>{{i.crypto.name}}</td>
+                    <td>{{i.mode}}</td>
+                    <td>${{i.profit}}</td>
+                    <td>{{i.time}} miutes</td>
+                    {% if i.open_trade %}
+                    <td><button class="btn" style="font-size: 12px; background-color: green;"> <span>Open</span> </button></td>
+                    {% else %}
+                    <td><button class="btn" style="font-size: 12px; background-color: red;"> <span>Close</span> </button></td>
+                    {% endif %}
+                    <td><a href="{% url 'admin-remove-trade' i.ref %}" style="color: red;">X</a> </td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </div><!-- End Recent Sales -->
+
+
+
+         <div class="card">
+        <div class="card-body">
+
+          <h5 class="card-title">Send Message</h5>
+          <!-- Floating Labels Form -->
+          <form class="row g-3">
+
+             <div class="col-12">
+              <div class="form-floating">
+                <textarea class="form-control" name="message" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
+                <label for="floatingTextarea">Message</label>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" name="message" class="btn btn-primary">Send Message</button>
+            </div>
+          </form><!-- End floating Labels Form -->
+
+        </div>
+      </div>
+
+
+         <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Actions</h5>
+          <button class="btn btn-full my-2" data-bs-toggle="modal" data-bs-target="#verticalycentered1">Take Trade</button>
+          <div class="modal fade" id="verticalycentered1" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Take Trade</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="row g-3" method="post">
+                    {% csrf_token %}
+                    <div class="col-4">
+                      <div class="form-floating mb-3">
+                        <select class="form-select" name="crypto" required id="floatingSelect" required aria-label="State">
+                          {% for c in crypto %}
+                          <option value="{{c.name}}" selected>{{c.name}}</option>
+                          {% endfor %}
+                        </select>
+                        <label for="floatingSelect">Crypto</label>
+                      </div>
+                    </div>
+
+
+                    <div class="col-4">
+                      <div class="form-floating mb-3">
+                        <select class="form-select" name="trader" id="floatingSelect" required aria-label="State">
+                          {% for t in trader %}
+                          <option value="{{t.trade.name}}" selected>{{t.trade.name}}</option>
+                          {% endfor %}
+                        </select>
+                        <label for="floatingSelect">Trader</label>
+                      </div>
+                    </div>
+    
+    
+                    <div class="col-4">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="user" id="floatingZip" disabled value="{{client.username}}" placeholder="User">
+                        <label for="floatingZip">USER</label>
+                      </div>
+                    </div>
+    
+    
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="profit" required id="floatingName" placeholder="Profit">
+                        <label for="floatingName">Profit</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="number" class="form-control" name="time" required id="floatingEmail" placeholder="Time in minute">
+                        <label for="floatingEmail">Time(minutes)</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="number" class="form-control" name="amount" required id="floatingPassword" placeholder="Amount">
+                        <label for="floatingPassword">Amount (129799.90 Max)</label>
+                      </div>
+                    </div>
+    
+                  
+    
+                     <div class="text-center">
+                      <button type="submit" name="buy" class="btn" style="background-color:green; ">Buy</button>
+                      <button type="submit" name="sell" class="btn" style="background-color:red;">Sell</button>
+                    </div>
+            
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <button class="btn btn-full my-2" data-bs-toggle="modal" data-bs-target="#verticalycentered2">Send email token</button>
+          <div class="modal fade" id="verticalycentered2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Email Token</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="row g-3" method="post">
+                    {% csrf_token %}
+    
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="token" id="floatingName" placeholder="Profit">
+                        <label for="floatingName">Token</label>
+                      </div>
+                    </div>
+                     <div class="text-center">
+                      <button type="submit" name="email" class="btn btn-dark">Send</button>
+                    </div>
+            
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-full my-2" data-bs-toggle="modal" data-bs-target="#withdraw">Send withdrawal token</button>
+          <div class="modal fade" id="withdraw" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Withdrawal Token</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="row g-3" method="post">
+                    {% csrf_token %}
+    
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="token" id="floatingName" placeholder="withdrawal">
+                        <label for="floatingName">Token</label>
+                      </div>
+                    </div>
+                     <div class="text-center">
+                      <button type="submit" name="withdraw" class="btn btn-dark">Send</button>
+                    </div>
+            
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <form action="" method="post">
+            {% csrf_token %}
+            <button name="refresh" type="submit" class="btn btn-full my-2">Refresh user</button>
+          </form>
+        </div>
+      </div>
+
+
+      </div>
+    </div><!-- End Left side columns -->
+
+
+  </div>
+</section>
+{% endblock content %}

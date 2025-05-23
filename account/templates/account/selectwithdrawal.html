@@ -1,0 +1,43 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div>
+
+        
+    <center>
+     <!-- Customers Card -->
+        <div class="col-xxl-4 col-xl-6">
+          <br>
+
+          <h4 class="center">SELECT WITHDRAWAL METHOD</h4>
+          
+          <br>
+
+        <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+            <div class="card-body ">
+              <a href="{% url 'bank' %}" >Bank</a>
+            </div>
+          </div>
+
+          <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+            <div class="card-body ">
+              <a href="{% url 'crypto-withdrawal' %}" >Crypto</a>
+            </div>
+          </div>
+
+          <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+            <div class="card-body ">
+              <a href="{% url 'paypal' %}" >PayPal</a>
+            </div>
+          </div>
+          <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+            <div class="card-body ">
+              <a href="{% url 'cashapp' %}" >CashApp</a>
+            </div>
+          </div>
+
+          
+
+        </center>
+  </div>
+{% endblock content %}

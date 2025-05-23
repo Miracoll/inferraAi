@@ -1,0 +1,155 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<section>
+    <ol>
+        <li>First get coin from API</li>
+        <li>Pls be patient this will take time</li>
+        <li>Don't interrupt while proccessing</li>
+    </ol>
+    <form action="{% url 'admin-add-crypto' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Number of coin</label>
+            <p>Crypto maximum - {{gotten_crypto}}/{{apicrypto}}</p>
+            <p>Forex maximum - {{gotten_forex}}/{{apiforex}}</p>
+            <p>Stock maximum - {{gotten_stock}}/{{apistock}}</p>
+            <input type="number" class="form-control" required placeholder="Number of coins to get" name="quantity">
+        </div>
+        <div class="form-group">
+            <label>Select currency</label>
+            <select class="form-select" name="coin" required>
+                <option value="crypto">Cypto</option>
+                <option value="forex">Forex</option>
+                <option value="stock">Stock</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success my-2">GET COINS NOW</button>
+    </form>
+</section>
+<hr>
+<section>
+    <ol>
+        <li>After getting coin from API</li>
+        <li>Pls be patient this will take time</li>
+        <li>Don't interrupt while proccessing</li>
+    </ol>
+    <form action="{% url 'admin-add-crypto-all' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Number of coin</label>
+            <p>Crypto available - {{availablecrypto}}/{{gotten_crypto}}</p>
+            <p>Forex available - {{availableforex}}/{{gotten_forex}}</p>
+            <p>Stock available - {{availablestock}}/{{gotten_stock}}</p>
+            <input type="number" class="form-control" required placeholder="Number of coins to get" name="quantity">
+        </div>
+        <div class="form-group">
+            <label>Select currency</label>
+            <select class="form-select" name="coin" required>
+                <option value="crypto">Cypto</option>
+                <option value="forex">Forex</option>
+                <option value="stock">Stock</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success my-2">GET CURRENCY NOW</button>
+    </form>
+</section>
+<hr>
+<section>
+    <h2>SEARCH FOR A UNIQUE STOCK</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Get stock</label>
+            <input type="text" class="form-control" required placeholder="Enter a phrase" name="mstock">
+        </div>
+        <button type="submit" name="stock" class="btn btn-success my-2">FIND NOW</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        {% if coin %}
+        {% for coin in coin %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{coin.name}}</td>
+            <td><a href="{% url 'admin-set-coin-add' coin.id %}">Add</a></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</section>
+<hr>
+<section>
+    <h2>GET STOCK, THEN ADD TO STOCKBANK</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <ol>
+                <li>No use of space e.g (united state will be united-state)</li>
+            </ol>
+            <label>Get stock</label>
+            <input type="text" class="form-control" required placeholder="Enter a country" name="mcountry">
+        </div>
+        <button type="submit" name="country" class="btn btn-success my-2">ADD STOCK</button>
+    </form>
+</section>
+<hr>
+<section>
+    <h2>SEARCH FOR A UNIQUE CRYPTO</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Get crypto</label>
+            <input type="text" class="form-control" required placeholder="Enter a phrase" name="mmstock">
+        </div>
+        <button type="submit" name="crypto" class="btn btn-success my-2">FIND NOW</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        {% if crypto %}
+        {% for coin in crypto %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{coin.name}}</td>
+            <td><a href="{% url 'admin-set-crypto-add' coin.id %}">Add</a></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</section>
+<hr>
+<section>
+    <h2>SEARCH FOR A UNIQUE FOREX</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Get forex</label>
+            <input type="text" class="form-control" required placeholder="Enter a phrase" name="mmmstock">
+        </div>
+        <button type="submit" name="forex" class="btn btn-success my-2">FIND NOW</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        {% if forex %}
+        {% for coin in forex %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{coin.name}}</td>
+            <td><a href="{% url 'admin-set-forex-add' coin.1d %}">Add</a></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</section>
+{% endblock content %}

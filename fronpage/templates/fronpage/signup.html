@@ -1,0 +1,118 @@
+{% extends "fronpage/main.html" %}
+{% load static %}
+
+{% block content %}
+<section class="d-flex align-items-center min-vh-100 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">  <!-- Wider column classes -->
+                <div class="card shadow-sm">
+                    <div class="card-body p-4 p-sm-5">
+                        <div class="text-center mb-4">
+                            <a class="navbar-brand" href="{% url 'login' %}">
+                                <img src="{% static 'frontpage/img/user/Asset 1.png' %}" alt="logo" width="110" height="40" class="d-inline-block">
+                            </a>
+                            <p class="lead text-muted mt-3 mb-0">Create your account</p>
+                        </div>
+                        
+                        <!-- registration form begin -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user fa-sm text-secondary"></i></span>
+                                        <input id="first-name" name="first-name" type="text" class="form-control" placeholder="First Name" aria-label="First Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user fa-sm text-secondary"></i></span>
+                                        <input id="last-name" name="last-name" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-at fa-sm text-secondary"></i></span>
+                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username" aria-label="Username" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope fa-sm text-secondary"></i></span>
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="Email" aria-label="Email" required>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock fa-sm text-secondary"></i></span>
+                                    <input id="password" name="pass1" type="password" class="form-control" placeholder="Password" aria-label="Password" required>
+                                </div>
+                                <small class="text-muted">Use 8 or more characters with a mix of letters, numbers & symbols</small>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock fa-sm text-secondary"></i></span>
+                                    <input id="confirm-password" name="pass2" type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-money-bill-wave fa-sm text-secondary"></i></span>
+                                    <select id="currency" name="currency" class="form-select" aria-label="Currency" required>
+                                        <option value="" selected disabled>Select Currency</option>
+                                        <option value="USD">US Dollar (USD)</option>
+                                        <option value="EUR">Euro (EUR)</option>
+                                        <option value="GBP">British Pound (GBP)</option>
+                                        <option value="JPY">Japanese Yen (JPY)</option>
+                                        <option value="AUD">Australian Dollar (AUD)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    I agree to the <a href='{% url "front-term" %}' class="text-decoration-none">Terms of Service</a> and <a href="{% url "front-policy" %}" class="text-decoration-none">Privacy Policy</a>
+                                </label>
+                            </div>
+                            
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="btn btn-primary rounded-pill" name="submit">Create Account</button>
+                            </div>
+                        </form>
+                        <!-- registration form end -->
+                        
+                        <div class="text-center mb-4">
+                            <h6 class="text-line text-muted">
+                                <span>Or sign up with</span>
+                            </h6>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
+                            <a class="btn btn-light rounded-pill bg-google flex-grow-1" href="#">
+                                <i class="fab fa-google me-2"></i>Google
+                            </a>
+                            <a class="btn btn-light rounded-pill bg-facebook flex-grow-1" href="#">
+                                <i class="fab fa-facebook-f me-2"></i>Facebook
+                            </a>
+                        </div>
+                        
+                        <div class="text-center" >
+                            <span style="font-size: 14px;" class="text-muted">Already have an account? <a href='{% url "login" %}' class="text-decoration-none">Sign in</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

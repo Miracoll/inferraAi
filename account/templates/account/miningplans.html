@@ -1,0 +1,90 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+<section id="pricing" class="pricing">
+
+    <div class="container" data-aos="fade-up">
+
+
+           
+
+      <header class="section-header" style="text-align: center;">
+        <h2>Minning Plans</h2>
+      </header>
+
+      <div style="padding: 20px;"></div>
+
+      <div class="row gy-4" data-aos="fade-left">
+        {% for plan in plan %}
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="box">
+            <h3 style="color: #07d5c0;">{{plan.name}} Weeks Contract</h3>
+            <div class="price">${{plan.min_amount}}</div>
+            <ul>
+              <li>Min Deposit ${{plan.max_amount}}</li>
+              {% if plan.max_amount == None %}
+              <li>Max Deposit $</li>
+              {% else %}
+              <li>Max Deposit ${{plan.max_amount}}</li>
+              {% endif %}
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="{% url 'depositemining' plan.ref %}" class="btn"> PURCHASE PLAN</a>
+          </div>
+        </div>
+        {% endfor %}
+        {% comment %}
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="box">
+            <!-- <span class="featured">3 Weeks Contract</span> -->
+            <h3 style="color: #65c600;">3 Weeks Contract</h3>
+            <div class="price">$50000</div>
+            <img src="{% static 'assets/img/pricing-starter.png' %}" class="img-fluid" alt="">
+            <ul>
+              <li>Min Deposit $50000</li>
+              <li>Max Deposit $99999</li>
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="deposite.html" class="btn"> PURCHASE PLAN</a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="box">
+            <h3 style="color: #ff901c;">2 Weeks Contract</h3>
+            <div class="price">$25000</div>
+            <img src="{% static 'assets/img/pricing-business.png' %}" class="img-fluid" alt="">
+            <ul>
+              <li>Min Deposit $25000</li>
+              <li>Max Deposit $49999</li>
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="deposite.html" class="btn">PURCHASE PLAN</a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="box">
+            <h3 style="color: #ff0071;">1 Week Contract</h3>
+            <div class="price">$5000</div>
+            <img src="{% static 'assets/img/pricing-ultimate.png' %}" class="img-fluid" alt="">
+            <ul>
+              <li>Min Deposit $5000</li>
+              <li>Max Deposit $24999</li>
+              <li>Referral Bonus</li>
+              <li>Full IT Support</li>
+            </ul>
+            <a href="deposite.html" class="btn">PURCHASE PLAN</a>
+          </div>
+        </div>
+        {% endcomment %}
+
+      </div>
+
+    </div>
+
+  </section><!-- End Pricing Section -->
+{% endblock content %}

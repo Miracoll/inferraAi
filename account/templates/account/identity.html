@@ -1,0 +1,45 @@
+{% extends 'account/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+
+        
+    <center>
+     <!-- Customers Card -->
+        <div class="col-xxl-4 col-xl-5">
+
+
+         
+
+
+        <div class="card">
+        <div class="card-body">
+           <h1 class="center">Verify Your Identity</h1>
+               
+            <p>Please verify your identity by uploading a valid government issued identification card.</p>
+
+            <p>You may experience difficulties when uploading from an ios device. Make sure your browser has camera access in your ios settings.</p>
+
+            <br>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
+            <!-- <div class="row mb-3">
+              <div class="col-sm-12">
+                <div class="input-group custom-file-button">
+                  <label class="input-group-text" for="formFile">Select Back</label>
+                  <input class="form-control" type="file" id="formFile">
+                </div>
+              </div>
+            </div> -->
+
+            <button type="submit" class="btn btn-full my-2">Submit</button>
+        </form>
+
+          
+        </div>
+      </div>
+
+        </center>
+  </div>
+{% endblock content %}

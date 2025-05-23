@@ -1,0 +1,71 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+<center>
+    <div class="col-xxl-4 col-xl-7" style="padding-top: 30px;">
+    
+    
+      <div class="fade-appear-done fade-enter-done">
+        <center>
+          <img src="{{user.image.url}}" class="circle" height="150px" width="150px">
+          <h2>{{user.last_name}} {{user.first_name}}</h2>
+          <p>VERIFICATIONS</p>
+        </center>
+        <div class="row">
+          <div class="col l6 s12 offset-l3">
+            <ul class="collection" style="list-style-type: none;">
+    
+    
+              <a class="collection-item bg" href="{% url 'home' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px; text-align: left;">
+                        <div class="card-body over">                  
+                          <div style="padding: 1rem 1rem 0.8rem; background: rgb(181, 72, 198); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                           <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">mail</span>
+                          </div>
+                          
+                          <span style="color: rgb(38, 166, 154);">Email Verification</span>
+                          {% if user.verify_email %}
+                          <span style="color: silver; font-size: 12px;">Completed</span>
+                          {% else %}
+                          <span style="color: silver; font-size: 12px;">Pending <small><a href="">verify now</a></small></span>
+                          {% endif %}
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+               <a class="collection-item bg" href="{% url 'identity' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px; text-align: left;">
+                        <div class="card-body over">                  
+                          <div style="padding: 1rem 1rem 0.8rem; background: rgb(225, 85, 93); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                            <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">person</span>
+                          </div>
+                          <span style="color: rgb(38, 166, 154);">Identity Verification</span> <span style="color: silver; font-size: 12px;">Completed</span>
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+               <a class="collection-item bg" href="{% url 'address' %}">
+                <li>
+                   <div class="card info-card customers-card over" style="margin-bottom: 0px;text-align: left; ">
+                        <div class="card-body over">                  
+                          <div style="padding: 1rem 1rem 0.8rem; background: rgb(82, 82, 152); border-radius: 10px; display: inline-block; margin-right: 1rem;">
+                           <span class="material-icons notranslate" style="font-size: 30px; margin: 0px; padding: 0px; color: white;">home</span>
+                          </div>
+                          <span style="color: rgb(38, 166, 154);">Address Verification</span> <span style="color: silver; font-size: 12px;">Completed</span>
+                        </div> 
+                    </div>
+                </li>
+              </a>
+    
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </center>
+{% endblock content %}

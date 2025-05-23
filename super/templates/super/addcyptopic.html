@@ -1,0 +1,17 @@
+{% extends 'super/main.html' %}
+{% block content %}
+<section>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Select currency</label>
+            <select class="form-select" name="coin">
+                <option value="crypto">Cypto</option>
+                <option value="forex">Forex</option>
+            </select>
+            <span style="color:red">Stock not included(use step one only)</span>
+        </div>
+        <button type="submit" class="btn btn-success">GET CURRENCY NOW</button>
+    </form>
+</section>
+{% endblock content %}

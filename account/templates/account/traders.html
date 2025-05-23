@@ -1,0 +1,142 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+<div style="padding:20px"></div>
+
+
+              <!-- <div style="padding:20px"></div> -->
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="search" name="hint" id="" class="form-control" placeholder="Trader">
+                <button type="submit" class="btn btn-dark my-2 w-100 btn-small">Search</button>
+              </form>
+              <div style="max-height: 75vh; overflow-y: scroll;">
+                <!-- Bordered Tabs Justified -->
+                <div  class="tag bg" >
+    
+                  <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+                  <li class="nav-item flex-fill" role="presentation">
+                    <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true"> <span class="material-icons notranslate">hourglass_bottom</span><span>AVAILABLE TRADERS</span></button>
+                  </li>
+                  <li class="nav-item flex-fill" role="presentation">
+                    <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><span class="material-icons notranslate">hourglass_top</span><span>COPIED TRADER(S)</span></button>
+                  </li>
+                  </ul>
+                </div>
+                
+    
+                  <div style="padding:20px;"></div>
+    
+                 <div class="card" style="padding:20px;">
+                  <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                    <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
+                      {% if not traders %}
+                      <p style="text-align: center;"><span class="app-font-normal">NO AVAILABLE TRADER</span></p>
+                      {% else %}
+                      {% for trader in traders %}
+                      <div class="col-xxl-12 col-xl-12">
+
+                        <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+                          <div class="card-body ">
+
+                            <div class="app-flex justify-content-center">
+
+                              <div class="text-center">
+                                  <img src="{{trader.image.url}}" class="" style="max-height: 150px; width:150px;">
+                                  <p style="font-weight: bold;">{{trader.name}}</p>
+                                  
+                                  <span>{{trader.win_rate}}% Win Rate</span><br>
+                                  <span>{{trader.profit}}% Profit Share</span><br>
+                                  <div style="flex: 0.7 1 0%; " >
+                                    <b><a href="{% url 'copy-trade' trader.ref %}" class="green btn white-text" style="padding: 10px;">Copy</a></b>
+                                  </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <hr>
+                      {% endfor %}
+                      {% endif %}
+                    </div>
+    
+                    <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+                      {% if not copied %}
+                      <p style="text-align: center;"><span class="app-font-normal">NO COPIED TRADER</span></p>
+                      {% else %}
+                      {% for copied in copied %}
+                      <div class="col-xxl-12 col-xl-12" >
+
+                        <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+                          <!-- <div class="card-body ">
+
+                            <div class="app-flex " style="align-items: center;">
+                                <div style="flex: 0.8 1 0%;">
+                                  <center>
+                                    <img src="{{copied.trade.image.url}}" class="circle" style="max-height: 100px;">
+                                  </center>
+                                </div>
+
+                              <div style="flex: 3 1 0%; text-align: left; padding-left: 30px;">
+                                <p style="font-weight: bold;">{{copied.trade.name}}</p>
+                                
+                                <span>{{copied.trade.win_rate}}% Win Rate</span><br>
+                                <span>{{copied.trade.profit}}% Profit Share</span><br>
+
+                              </div>
+                              {% if copied.approved %}
+                              <div style="flex: 0.7 1 0%; " >
+                                <p style="font-size: 12px; font-weight: bold; text-transform: uppercase;">Copied</p><br>
+                                    <b><a class="green btn white-text" style="padding: 10px;">Success</a></b>
+                              </div>
+                              {% else %}
+                              <div style="flex: 0.7 1 0%; " >
+                                <p style="font-size: 12px; font-weight: bold; text-transform: uppercase;">Copying</p><br>
+                                    <b><a href="{% url 'cancel-trade' copied.ref %}" class="red btn white-text" style="padding: 10px;">Cancel</a></b>
+                              </div>
+                              {% endif %}
+                            </div>
+                          </div> -->
+
+                          <div class="card-body ">
+
+                            <div class="app-flex justify-content-center">
+
+                              <div class="text-center">
+                                  <img src="{{copied.trade.image.url}}" class="" style="max-height: 150px; width:150px;">
+                                  <p style="font-weight: bold;">{{copied.trade.name}}</p>
+                                  
+                                  <span>{{copied.trade.win_rate}}% Win Rate</span><br>
+                                  <span>{{copied.trade.profit}}% Profit Share</span><br><br>
+                                  {% if copied.approved %}
+                                  <div style="flex: 0.7 1 0%; " >
+                                    <p style="font-size: 12px; font-weight: bold; text-transform: uppercase;">Copied</p><br>
+                                        <b><a class="green btn white-text" style="padding: 10px;">Success</a></b>
+                                  </div>
+                                  {% else %}
+                                  <div style="flex: 0.7 1 0%; " >
+                                    <p style="font-size: 12px; font-weight: bold; text-transform: uppercase;">Copying</p>
+                                        <b><a href="{% url 'cancel-trade' copied.ref %}" class="red btn white-text" style="padding: 10px;">Cancel</a></b>
+                                  </div>
+                                  {% endif %}
+                              </div>
+
+                            </div>
+                          </div>
+
+                          
+                        </div>
+
+                      </div>
+                      <hr>
+                      {% endfor %}
+                      {% endif %}
+                    </div>
+                  </div><!-- End Bordered Tabs Justified -->
+                 </div>
+              </div>
+{% endblock content %}

@@ -1,0 +1,78 @@
+ {% extends "fronpage/main.html" %}
+ {% load static %}
+ {% block content %}
+ <section class="section-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 position-relative text-center">
+                <h1 class="mt-0 mb-1">About Mining</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'login' %}">Home</a></li>
+                    </ol>
+                </nav>
+                <img class="position-absolute card-decor animate-5" src="{% static 'frontpage/img/in-avo-4-decor-1.svg' %}" alt="decor" style="top: 25%; left: 5%;">
+                <img class="position-absolute card-decor animate-6" src="{% static 'frontpage/img/in-avo-4-decor-2.svg' %}" alt="decor" style="top: -22%; left: 30%;">
+                <img class="position-absolute card-decor animate-7" src="{% static 'frontpage/img/in-avo-4-decor-3.svg' %}" alt="decor" style="top: -16%; left: 72%;">
+                <img class="position-absolute card-decor animate-6" src="{% static 'frontpage/img/in-avo-4-decor-4.svg' %}" alt="decor" style="top: 89%; left: 94%;">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb content end -->
+<main>
+<!-- section content begin -->
+
+<!-- section content begin -->
+<section class="py-5" style="width: 100%; box-sizing: border-box; padding: 0 10px;">
+<div class="container-fluid" style="padding: 0;">
+    <div class="row justify-content-center" style="margin: 0;">
+        <div class="col-12" style="padding: 0;">
+            <div class="card" style="margin: 0;">
+                <div class="card-body p-3 p-md-5">
+                    
+                    <div class="crypto-mining-section">
+<div class="mining-intro">
+    <h1>Cryptocurrency Mining Explained</h1>
+    <p>Cryptocurrency networks need computational power to run securely. The world's most powerful blockchains are supported by millions of computers around the world. Unlike paper money, Bitcoin and other cryptocurrencies are produced mathematically and held digitally.</p>
+    <p>The people who voluntarily offer their computing power to secure these cryptocurrency networks are called miners.</p>
+</div>
+
+<div class="decentralized-nature">
+    <p>Cryptocurrencies don't have a central government or other so-called 'middlemen' that decide about the future of the system. They are in fact digital, borderless democracies in which miners vote with their computing power to reach order and consensus.</p>
+</div>
+
+<div class="security-section">
+    <h2>HOW IS BITCOIN KEPT SECURE</h2>
+    <p>The only way to not create money out of thin air or corrupt it, is to burn real energy. This is called Proof-Of-Work. Today, bitcoin is the most secure computer network on the planet and it's practically impossible to break it!</p>
+    <p>The reason for that is hash power, the umbrella term used for the computing power that miners provide to the bitcoin network and similar cryptocurrency networks. Due to the rapid growth of the ecosystem, mining operations today are mostly running with specialized high-performance computers that function most efficiently set up in large data centers.</p>
+</div>
+
+<div class="incentives-section">
+    <h2>WHAT ARE THE INCENTIVES FOR MINERS</h2>
+    <p>It all comes down to trust: Miners keep the blockchains trustworthy and are rewarded for their efforts. As miners, we are processing and verifying the transactions of the cryptocurrency ecosystems and keeping their public transaction history (blockchains) maintained and secure.</p>
+    <p>For this, the mining community is rewarded with the networks' transaction fees and newly created coins. It's a win-win situation! When you start mining with us, you are getting your share of this reward.</p>
+</div>
+
+<div class="vision-section">
+    <h2>THE BIG VISION OF CRYPTO CURRENCY</h2>
+    <p>To keep the integrity (and values!) of all cryptocurrency ecosystems intact, miners keep the networks safe and its authority decentralized by keeping each other constantly in check. This allows both a healthy growth and a fair distribution of currency units to all crypto-citizens!</p>
+</div>
+</div>
+
+                    <hr class="my-4">
+                    
+                    <div class="card bg-light border-0 mt-4 mb-1">
+                        <div class="card-body px-2 py-1">
+                            <small>For general inquiries please contact <a class="link-primary text-decoration-none" href="mailto:">legal@InferraAI.org</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- section content end -->
+</main>
+ {% endblock content %}

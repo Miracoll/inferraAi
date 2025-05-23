@@ -1,0 +1,94 @@
+{% extends 'account/main.html' %}
+{% load humanize %}
+{% block content %}
+<div style="padding: 20px;"></div>
+
+    <center><a class="btn" href="{% url 'crypto' %}" style="font-size: 14px; margin-bottom: 10px;">NEW DEPOSIT</a>
+      <div class="col-xxl-4 col-xl-10" style="padding-left: 10px; padding-right: 10px;">
+        <div class="alert alert-light border-light alert-dismissible fade show over" role="alert" style="text-align: left; padding-top:5px; padding-bottom: 5px; margin-bottom: 0px; font-size: 15px; line-height: 17px;">
+                   Deposits will be pending until there are sufficent confirmations on the blockchain.
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"  style="padding-top:5px;"></button>
+        </div>
+      </div>
+
+    
+    </center>
+
+    <!-- Customers Card -->
+    {% for deposite in deposite %}
+    <center >
+ 
+        <div class="col-xxl-4 col-xl-10" >
+
+            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+            <div class="card-body ">
+
+                <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                    <center>
+                        <p class="app-trading-month text-uppercase">{{ deposite.date_created|date:"M" }}</p>
+                        <span class="app-trading-day">{{ deposite.date_created|date:"d" }}</span>
+                    </center>
+                    </div>
+                <div style="flex: 3 1 0%; text-align: left;">
+                    <br>
+                    <span>${{deposite.amount|intcomma}}</span>
+                    <br>
+                    <span> {{deposite.payment_method.abbr}}</span>
+                    {% if deposite.status == 2 %}
+                    <p>{{deposite.plan}}  (Successful)</p>
+                    {% else %}
+                    <p>{{deposite.plan}}  (Pending)</p>
+                    {% endif %}
+                </div>
+
+                <div style="flex: 0.7 1 0%;">
+                    <a href="{% url 'payment' deposite.ref %}">PAY</a>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </center>
+    {% endfor %}
+
+    {% comment %}
+    <center >
+ 
+        <div class="col-xxl-4 col-xl-10" >
+
+            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+            <div class="card-body ">
+
+                <div class="app-flex " style="align-items: center;">
+                    <div style="flex: 0.8 1 0%;">
+                    <center>
+                        <p class="app-trading-month">MAR</p>
+                        <span class="app-trading-day">10</span>
+                    </center>
+                    </div>
+                <div style="flex: 3 1 0%; text-align: left;">
+                    <br>
+                    <span>$123,456,789.00</span>
+                    <br>
+                    <span> USDT</span>
+                    <p>Trading  (Pending)</p>
+                </div>
+
+                <div style="flex: 0.7 1 0%;">
+                    <a href="/user/deposits/176">PAY</a>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </center>
+    {% endcomment %}
+</div>
+{% endblock content %}

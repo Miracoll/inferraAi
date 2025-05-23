@@ -1,0 +1,83 @@
+{% extends 'super/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Payment Lists</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'admin-home' %}">Dashboard</a></li>
+      <li class="breadcrumb-item">Payments</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Payment List</h5>
+        
+
+          <!-- Table with stripped rows -->
+          <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+            
+          <div class="datatable-container" style="overflow-x:auto;">
+            <button class="btn btn-full" data-bs-toggle="modal" data-bs-target="#verticalycentered1">Add Payment Method</button>
+          <div class="modal fade" id="verticalycentered1" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Take Trade</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="row g-3" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      {{form|crispy}}
+                    </div>
+                     <div class="text-center">
+                      <button type="submit" class="btn btn-danger">ADD</button>
+                    </div>
+            
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+            <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Payment method</th>
+                <th scope="col">Wallet Address</th>
+                <th scope="col">QRcode</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for currency in currency %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{currency.currency}}</td>
+                <td>{{currency.address}}</td>
+                <td><img src="{{currency.qrcode.url}}" alt="" width="120" height="120"></td>
+                  <td><a href="{% url 'admin-update-payment-method' currency.ref %}" style="color: green;"><i class="bi bi-pencil-square"></i></a></td>                      
+                  <td><a href="{% url 'admin-delete-payment-method' currency.ref %}" style="color: red;"><i class="bi bi-x-square"></i></a> </td>
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

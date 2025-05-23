@@ -1,0 +1,57 @@
+{% extends "fronpage/main.html" %}
+{% load static %}
+{% block content %}
+<section class="d-flex align-items-center min-vh-100 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4 p-sm-5">
+                        <div class="text-center mb-4">
+                            <a class="navbar-brand" href="{% url 'login' %}">
+                                <img src="{% static 'frontpage/img/user/Asset 1.png' %}" alt="logo" width="110" height="40" class="d-inline-block">
+                            </a>
+                            <p class="lead text-muted mt-3 mb-0">Log into your account</p>
+                        </div>
+                        
+                        <!-- login form begin -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user fa-sm text-secondary"></i></span>
+                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username" aria-label="Username">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock fa-sm text-secondary"></i></span>
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" aria-label="Password">
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe"><small>Remember me</small></label>
+                                </div>
+                                <a href="#" class="text-decoration-none"><small>Forgot password?</small></a>
+                            </div>
+                            
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="btn btn-primary rounded-pill" name="submit">Sign in</button>
+                            </div>
+                        </form>
+                        <!-- login form end -->
+                        
+                        <div class="text-center">
+                            <small class="text-muted">Don't have an account? <a href='{% url "signup" %}' class="text-decoration-none">Register here</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div>
+    <div>
+
+      
+      <center>
+       <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-10">
+            <br>
+
+            <h4 class="center">Pricing</h4>
+            
+            <br>
+
+          <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+              <div class="card-body ">
+                <a href="{% url 'tradingplan' %}" style="color: #26a69a;">Trading Plans</a>
+              </div>
+            </div>
+
+            <div class="card info-card customers-card over" >
+
+              <div class="card-body ">
+                <a href="{% url 'miningplan' %}" style="color:#26a69a;">Minning Plans</a>
+              </div>
+            </div>
+
+          </center>
+    </div>
+  </div>
+{% endblock content %}

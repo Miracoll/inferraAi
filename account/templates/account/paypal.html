@@ -1,0 +1,98 @@
+{% extends 'account/main.html' %}
+{% block content %}
+
+    <div>
+      <div>
+
+
+        <center>
+
+          <div>
+          <p style="font-weight: bold;">WITHDRAW TO PAYPAL</p>
+        </div>
+
+        </center>
+        
+        <center>
+         <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-5">
+
+            <div class="card">
+            <div class="card-body" >
+
+              <div style="padding: 5px;"></div>
+              <form class="row g-3" method="post">
+                {% csrf_token %}
+                 <div class="col-md-12">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="State" name="to">
+                       <option value="1" selected="">Trading ($0.00)</option>
+                        <option value="2">Bitcoin Mining</option>
+                        <option value="3">Ethereum Mining</option>
+                        <option value="4">Dogecoin Mining</option>
+                        <option value="5">Binance Coin Mining</option>
+                    </select>
+                    <label for="floatingSelect">To</label>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name" name="withdrawal">
+                    <label for="floatingName" style="color:#777777;">Withdrawal Code</label>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name" name="email">
+                    <label for="floatingName" style="color:#777777;">Paypal Email</label>
+                  </div>
+                </div>
+
+
+
+                <div class="col mb-3">
+                  <label class="col col-form-label">USD</label>
+                   <div class="col-md-9">
+                    <input type="text" class="form-control"  placeholder="Amount" name="amount">
+                    <!-- <label for="floatingName">Amount</label> -->
+                  </div>
+                </div>
+
+               
+               <div>
+                <button type="submit" name="submit" class="btn btn-full btn-secondary"> Submit</button>
+               </div> 
+               
+              </form><!-- End floating Labels Form -->
+              <div>
+                <form action="{% url 'withdrawal-code' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" name="withdrawal" class="btn btn-full my-2" style="width:100%" data-bs-toggle="modal" data-bs-target="#verticalycentered">Request Withdrawal Code</button>
+                </form>
+             </div>
+              <div class="modal fade" id="verticalycentered" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Requesting Code</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Request received</h3>
+                    </div>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            </center>
+      </div>
+    </div>
+
+{% endblock content %}

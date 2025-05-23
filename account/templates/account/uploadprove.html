@@ -1,0 +1,42 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div>
+    <div>
+
+      
+      <center>
+       <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-4">
+
+
+            <br>
+            <br>
+            <h4 class="center">Upload Payment Proof</h4>
+            <br>
+
+          <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+              <div class="row mb-3">
+                <div class="col-sm-12">
+                  <!--<input class="form-control" name="myfile" type="file" id="formFile">-->
+                  {{ form }}
+                </div>
+              </div>
+
+
+              <button type="submit" name="submit" class="btn btn-full">Submit</button>
+          </form>
+
+            
+          </div>
+        </div>
+
+          </center>
+    </div>
+  </div>
+{% endblock content %}

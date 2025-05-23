@@ -1,0 +1,52 @@
+{% extends 'super/main.html' %}
+{% block content %}
+    <div class="pagetitle">
+      <h1>Update Plan</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'admin-home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'admin-plan' %}">plans</a></li>
+          <li class="breadcrumb-item">Trading Plans</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <div class="card">
+            <div class="card-body">
+            
+              
+
+              <p></p>
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3" method="post">
+                {% csrf_token %}
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" name="package" placeholder="PACKAGE NAME" value="{{plan.name}}">
+                    <label for="floatingName">Plan Name</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="floatingEmail" name="min" placeholder="Minimum Deposite" value="{{plan.min_amount}}">
+                    <label for="floatingEmail">Min Deposite $</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="floatingEmail" name="max" placeholder="Maximum Deposite" value="{{plan.max_amount}}">
+                    <label for="floatingEmail">Max Deposite $</label>
+                  </div>
+                </div>
+
+                
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Update Trading Plan</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+
+            </div>
+          </div>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'account/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+    <div>
+
+      
+      <center>
+       <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-6">
+
+
+           
+
+
+          <div class="card">
+          <div class="card-body">
+             <h1 class="center">Address Verification</h1>
+                <div style="width: 90%;">
+                  <p>Please verify your address by uploading a recent utility bill You can update your address <a href="{% url 'updateaddress' %}">here</a> </p>
+                </div>
+
+                <p style="text-align: left;"> 
+                  <span style="font-weight: bold;">City</span>  {{user.city}} <br>
+                    <span style="font-weight: bold;">State</span>  {{user.state}} <br>
+                    <span style="font-weight: bold;">Zip Code</span>  {{user.post_code}} <br>
+                    <span style="font-weight: bold;">Country</span>  {{user.country}} <br>
+                    <span style="font-weight: bold;">Street</span>  {{user.street_address}}<br>
+                </p>
+
+              <br>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row mb-3">
+                <div class="col-sm-12">
+                  {{form|crispy}}
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-full">Submit</button>
+          </form>
+
+            
+          </div>
+        </div>
+
+          </center>
+    </div>
+  </div>
+{% endblock content %}

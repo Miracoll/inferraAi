@@ -1,0 +1,68 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div style="padding: 20px;"></div>
+
+    <center><a class="btn" href="{% url 'selectwithdrawal' %}" style="font-size: 14px; margin-bottom: 10px;">NEW WITHDRAWAL REQUEST</a></center>
+
+    <!-- Customers Card -->
+    <center >
+        {% if not payment %}
+        <div class="col-xxl-4 col-xl-8" >
+
+            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+                <div class="card-body">
+
+                    <div class="center" style="padding: 10px;">
+                    NO WITHDRAWALS YET   
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+
+        <div class="col-xxl-4 col-xl-8" >
+
+            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
+
+              <div class="card-body">
+
+                <div class="app-flex " style="align-items: center;">
+                    {% for p in payment %}
+                    <div style="flex: 0.8 1 0%;">
+                      <center style="max-height: 100px;">
+                         <p class="app-trading-month">{{ p.date_created|date:"M" }}</p>
+                        <span class="app-trading-day">{{ p.date_created|date:"d" }}</span>
+                      </center>
+                    </div>
+
+                  <div style="flex: 3 1 0%; text-align: left; width: 80%;">
+                    <div style="padding-left: 10px;">
+                      <span><b class"mx-2">AMOUNT:</b>  USD {{ p.amount }} </span> <br>
+                      <span ><b>Mode of withdrawal</b> {{ p.mode | upper }}</span>
+                    </div>
+                    
+
+                  </div>
+
+                  <div>
+                    <p style="font-size: 12px; font-weight: bold; text-transform: uppercase; position: absolute; top:10px; right: 10px;">
+                        {% if p.status == 1 %}
+                        Pending
+                        {% elif p.status == 2 %}
+                        PAID
+                        {% else %}
+                        Declined
+                        {% endif %}
+                    </p><br>
+                        <b><a style="padding: 10px;"></a></b>
+                  </div>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+    </center>
+{% endblock content %}

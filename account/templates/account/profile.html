@@ -1,0 +1,63 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+<div style="padding:10px;"></div>
+
+<center>
+         <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-6">
+
+            <div class="card">
+            <div class="card-body">
+
+                <img src="{% static 'assets/img/camera.png' %}" class="circle" height="150px">
+                <br>
+                <br>
+              <!-- Table with stripped rows -->
+              <table class="table table-striped">
+                
+                  <tr>
+                    <td style="padding: 15px;">EMAIL</td>
+                    <td style="padding: 15px;"> {{user.email}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">MOBILE NUMBER</td>
+                    <td style="padding: 15px;">{{user.mobile}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">FIRST NAME</td>
+                    <td style="padding: 15px;">{{user.first_name}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">LAST NAME</td>
+                    <td style="padding: 15px;">{{user.last_name}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">STREET ADDRESS</td>
+                    <td style="padding: 15px;">  {{user.street_address}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">POST CODE</td>
+                    <td style="padding: 15px;">{{user.post_code}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">CITY</td>
+                    <td style="padding: 15px;">{{user.city}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">STATE</td>
+                    <td style="padding: 15px;">{{user.state}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px;">COUNTRY</td>
+                    <td style="padding: 15px;">{{user.country}}</td>
+                  </tr>
+                
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+            </center>
+{% endblock content %}

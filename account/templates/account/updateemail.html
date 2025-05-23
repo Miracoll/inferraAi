@@ -1,0 +1,73 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div style="padding:10px;"></div>
+
+<center>
+         <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-6">
+
+            <div class="card">
+            <div class="card-body">
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3" style="padding: 50px;" method="post">
+                {% csrf_token %}
+                <span>{{user.email}}</span>
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                    <label for="floatingName" name="token" style="color:#777777;">Email Token</label>
+                  </div>
+                </div>
+
+                 <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                    <label for="floatingName" name="'email1" style="color:#777777;">New Email</label>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                    <label for="floatingName" name="'email2" style="color:#777777;">Confirm New Email</label>
+                  </div>
+                </div>
+
+                
+
+
+               <div>
+                <button type="submit" name="sub" class="btn" style="width:100%">Submit</button>
+               </div>
+
+                
+                
+               
+              </form><!-- End floating Labels Form -->
+              <div>
+                <form method="post">
+                  {% csrf_token %}
+                  <button type="submit" name="email" class="btn btn-full" style="width:100%" data-bs-toggle="modal" data-bs-target="#verticalycentered">Request Token</button>
+                </form>
+             </div>
+              <div class="modal fade" id="verticalycentered" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Requesting Token</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Request received</h3>
+                    </div>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            </center>
+{% endblock content %}
