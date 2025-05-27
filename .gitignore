@@ -70,3 +70,7 @@ coverage.xml
 
 # Testing
 test-results/
+
+# ChaseTrade specific files
+chasetrade/__init__.py
+chasetrade/settings.py

@@ -109,10 +109,10 @@ def updateUser(request, ref):
         token = request.POST.get('token')
         User.objects.filter(username=ref).update(token=token)
         # Send mail to user
-        subject = 'CHASETRADE UPADTE'
+        subject = 'InferraAI UPADTE'
         recipient = [act_user.email]
         text_content = f'Dear {act_user.last_name} your email request token is {token}'
-        html_content = f'<div><h3 style="color:purple">CHASETRADE</h3></div><div><p>Dear {act_user.last_name} your email request token is {token}</div>'
+        html_content = f'<div><h3 style="color:purple">InferraAI User Update</h3></div><div><p>Dear {act_user.last_name} your email request token is {token}</div>'
         message = EmailMultiAlternatives(subject=subject, body=text_content, to=recipient)
         message.attach_alternative(html_content, 'text/html')
         message.send()
@@ -122,10 +122,10 @@ def updateUser(request, ref):
         token = request.POST.get('token')
         User.objects.filter(username=ref).update(withdrawal_token=token)
         # Send mail to user
-        subject = 'CHASETRADE UPADTE'
+        subject = 'InferraAI UPADTE'
         recipient = [act_user.email]
         text_content = f'Dear {act_user.last_name} your withdrawal request token is {token}'
-        html_content = f'<div><h3 style="color:purple">CHASETRADE</h3></div><div><p>Dear {act_user.last_name} your withdrawal request token is {token}</div>'
+        html_content = f'<div><h3 style="color:purple">InferraAI</h3></div><div><p>Dear {act_user.last_name} your withdrawal request token is {token}</div>'
         message = EmailMultiAlternatives(subject=subject, body=text_content, to=recipient)
         message.attach_alternative(html_content, 'text/html')
         message.send()
@@ -198,10 +198,10 @@ def updateUser(request, ref):
     elif 'message' in request.POST:
         msg = request.POST.get('message')
         # Send mail to user
-        subject = 'CHASETRADE UPADTE'
+        subject = 'InferraAI UPADTE'
         recipient = [act_user.email]
         text_content = f'Dear {act_user.last_name}, {msg}'
-        html_content = f'<div><h3 style="color:purple">CHASETRADE</h3></div><div><p>Dear {act_user.last_name}, <br>{msg}</div>'
+        html_content = f'<div><h3 style="color:purple">InferraAI</h3></div><div><p>Dear {act_user.last_name}, <br>{msg}</div>'
         message = EmailMultiAlternatives(subject=subject, body=text_content, to=recipient)
         message.attach_alternative(html_content, 'text/html')
         message.send()
@@ -361,10 +361,10 @@ def paymentApprove(request, ref):
     Deposite.objects.filter(ref=ref).update(status=2)
     # act_user = Deposite.objects.get(ref=ref).user
     # # Send mail to user
-    # subject = 'CHASETRADE UPADTE'
+    # subject = 'InferraAI UPADTE'
     # recipient = [act_user.email]
     # text_content = f'Dear {act_user.last_name}, Your payment has been approved'
-    # html_content = f'<div><h3 style="color:purple">CHASETRADE</h3></div><div><p>Dear {act_user.last_name}, <br>Your payment has been approved</div>'
+    # html_content = f'<div><h3 style="color:purple">InferraAI</h3></div><div><p>Dear {act_user.last_name}, <br>Your payment has been approved</div>'
     # message = EmailMultiAlternatives(subject=subject, body=text_content, to=recipient)
     # message.attach_alternative(html_content, 'text/html')
     # message.send()

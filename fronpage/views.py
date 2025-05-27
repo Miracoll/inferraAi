@@ -11,7 +11,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 
-from account.functions import telegram
+from account.functions import telegram, welcomeEmail
 from account.decorators import allowed_users
 from account.models import User
 from account.tokens import account_activation_token
@@ -175,6 +175,9 @@ def signup(request):
         userid = User.objects.get(username=username).id
         getgroup = Group.objects.get(name='client')
         getgroup.user_set.add(userid)
+
+        # Send welcome email
+        welcomeEmail(request, user, email)
 
         messages.success(request, 'Registration successful')
         return redirect('login')
