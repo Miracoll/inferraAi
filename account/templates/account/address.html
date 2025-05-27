@@ -1,50 +1,39 @@
 {% extends 'account/main.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
-<div>
-    <div>
+<main id="main" class="main">
+  <center>
+    <div class="col-xxl-4 col-xl-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="center">Address Verification</h1>
+          <div style="width: 90%;">
+            <p>Please verify your address by uploading a recent utility bill. You can update your address <a href="updateaddress.html">here</a>.</p>
+          </div>
 
-      
-      <center>
-       <!-- Customers Card -->
-          <div class="col-xxl-4 col-xl-6">
+          <p style="text-align: left;">
+            <strong>City:</strong> Ehdhd<br>
+            <strong>State:</strong> Abuja<br>
+            <strong>Zip Code:</strong> 1232<br>
+            <strong>Country:</strong> Nigeria<br>
+            <strong>Street:</strong> Address Hegdgdh<br>
+          </p>
 
-
-           
-
-
-          <div class="card">
-          <div class="card-body">
-             <h1 class="center">Address Verification</h1>
-                <div style="width: 90%;">
-                  <p>Please verify your address by uploading a recent utility bill You can update your address <a href="{% url 'updateaddress' %}">here</a> </p>
-                </div>
-
-                <p style="text-align: left;"> 
-                  <span style="font-weight: bold;">City</span>  {{user.city}} <br>
-                    <span style="font-weight: bold;">State</span>  {{user.state}} <br>
-                    <span style="font-weight: bold;">Zip Code</span>  {{user.post_code}} <br>
-                    <span style="font-weight: bold;">Country</span>  {{user.country}} <br>
-                    <span style="font-weight: bold;">Street</span>  {{user.street_address}}<br>
-                </p>
-
-              <br>
-            <form method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="row mb-3">
-                <div class="col-sm-12">
-                  {{form|crispy}}
+          <form>
+            <div class="row mb-3">
+              <div class="col-sm-12">
+                <div class="input-group custom-file-button">
+                  <label class="input-group-text" for="formFile">Select Bill</label>
+                  <input class="form-control" type="file" id="formFile">
                 </div>
               </div>
-
-              <button type="submit" class="btn btn-full">Submit</button>
+            </div>
+            <button type="submit" class="btn btn-full">Submit</button>
           </form>
 
-            
-          </div>
         </div>
-
-          </center>
+      </div>
     </div>
-  </div>
+  </center>
+</main>
 {% endblock content %}

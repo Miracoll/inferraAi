@@ -1,76 +1,70 @@
 {% extends 'account/main.html' %}
+{% load static %}
+
 {% block content %}
-<div>
-
-
-    <center>
-
-      <div>
-      <p style="font-weight: bold;">FUND YOUR ACCOUNT</p>
-      <p><a href="{% url 'pricing' %}" style="font-size: 19px; color: #fc5a3f;">VIEW PRICING</a></p>
-      <p><a href="{% url 'buy' %}" style="font-size: 19px; color: #fc5a3f;">BUY CRYPTO NOW</a></p>
-    </div>
-
-    </center>
-    
-    <center>
-     <!-- Customers Card -->
-        <div class="col-xxl-4 col-xl-4">
-
-        <div class="card">
+<main id="main" class="main">
+        
+  <div class="container d-flex justify-content-center">
+    <div class="col-xxl-4 col-xl-6">
+      <div class="card shadow-sm">
         <div class="card-body">
-          <h5 class="card-title"></h5>
 
-          <!-- Floating Labels Form -->
-          <form class="row g-3" method="POST">
+          <!-- Header Section -->
+          <div class="text-center mb-4">
+            <h2 class="fw-bold mb-3">Fund Your Account</h2>
+            <div class="d-flex justify-content-center gap-3 mb-3">
+              <a href="{% url 'pricing' %}" class="btn btn-secondary btn-sm">VIEW PRICING</a>
+              <a href="{% url 'buy' %}" class="btn btn-secondary btn-sm">BUY CRYPTO NOW</a>
+            </div>
+          </div>
+          <div style="padding: 10px;"></div>
+
+          <!-- Form Section -->
+          <form class="needs-validation" method="post" novalidate>
             {% csrf_token %}
-
-
-            <div class="row mb-3">
-              <label class="col col-form-label">USD</label>
-               <div class="col-9">
-                <input type="number" min="500" class="form-control"  placeholder="Amount" name="amount">
-                <!-- <label for="floatingName">Amount</label> -->
+            <!-- Amount Input -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Amount in USD</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control py-3" name="amount" min="10" placeholder="Enter amount" required>
+                <span class="input-group-text">.00</span>
               </div>
+              <div class="form-text">Minimum deposit: $10.00</div>
             </div>
 
-
-            <div class="col-md-12">
-              <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" aria-label="State" name="paymethod">
-                  {% for i in currency %}
-                  <option value="{{i.abbr}}">{{i.currency}}</option>
-                  {% endfor %}
-                </select>
-                <label for="floatingSelect">Payment Method</label>
-              </div>
+            <!-- Payment Method -->
+            <div class="mb-4">
+              <label for="paymentMethod" class="form-label fw-semibold">Payment Method</label>
+              <select class="form-select py-3" id="paymentMethod" name="paymethod" required>
+                <option value="" disabled selected>Select payment method</option>
+                {% for i in currency %}
+                <option value="{{i.abbr}}">{{i.currency}}</option>
+                {% endfor %}
+              </select>
             </div>
 
-
-             <div class="col-md-12">
-              <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" aria-label="State" name="mining">
-                  <option value="Trading" selected="">Trading</option>
-                  <option value="Bitcoin Mining">Bitcoin Mining</option>
-                  <option value="Ethereum Mining">Ethereum Mining</option>
-                  <option value="Dogecoin Mining">Dogecoin Mining</option>
-                  <option value="Binance Coin Mining">Binance Coin Mining</option>
-                </select>
-                <label for="floatingSelect">To</label>
-              </div>
+            <!-- Destination -->
+            <div class="mb-4">
+              <label for="fundDestination" class="form-label fw-semibold">Fund Acount</label>
+              <select class="form-select py-3" id="fundDestination" name="mining" required>
+                <option value="" disabled>Select account to fund</option>
+                <option value="1" selected>Trading Account</option>
+                <option value="2">Bitcoin Mining</option>
+                <option value="3">Ethereum Mining</option>
+                <option value="4">Dogecoin Mining</option>
+                <option value="5">Binance Coin Mining</option>
+              </select>
             </div>
 
-
-           
-           <div>
-            <button type="submit" class="btn btn-full btn-secondary"> Proceed</button>
-           </div> 
-           
-          </form><!-- End floating Labels Form -->
-
+            <!-- Submit Button -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn py-3 fw-bold">PROCEED TO PAYMENT</button>
+            </div>
+          </form>
         </div>
       </div>
-
-        </center>
+    </div>
   </div>
+</main><!-- End #main -->
 {% endblock content %}

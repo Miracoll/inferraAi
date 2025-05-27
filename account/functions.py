@@ -32,7 +32,7 @@ def activateEmail(request, user, to_email):
         
 def telegram(message):
     TOKEN = "8006948716:AAHrcypxchK-fwF1qoXkw46pzU9JBWO4iUY"
-    chat_id = ['1322959136']
+    chat_id = ['1322959136','6963975811']
 
     for i in chat_id:
         url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={i}&text={message}"
@@ -54,3 +54,12 @@ def checkUserName(request,username):
             return redirect('register')
     
     return 'ok'
+
+def usd_to_btc(usd_amount):
+    url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+    response = requests.get(url)
+    data = response.json()
+    
+    btc_price = data['bitcoin']['usd']  # USD per 1 BTC
+    btc_amount = usd_amount / btc_price
+    return btc_amount

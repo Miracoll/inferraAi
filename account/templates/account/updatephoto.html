@@ -1,44 +1,44 @@
 {% extends 'account/main.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
+
 {% block content %}
-<div>
 
-        
-    <center>
-     <!-- Customers Card -->
-        <div class="col-xxl-4 col-xl-6">
+<main id="main" class="main">
 
+  <div>
+    <div>
 
-          <br>
-          <br>
-          
+      
+      <center>
+       <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-6">
+          <div class="card">
+          <div class="card-body">
 
-        <div class="card">
-        <div class="card-body">
+            <h3 class="center">Upload Photo</h3>
+            <br>
+            <img src="{% static 'assets/img/camera.png' %}" class="circle" height="100px">
 
-          <h3 class="center">Upload Photo</h3>
-          <br>
-          <img src="{{user.image.url}}" class="circle" height="100px">
-
-          <br>
-          <br>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row mb-3">
-              <div class="col-sm-12">
-                {{form|crispy}}
+            <br>
+            <br>
+            <form>
+              <div class="row mb-3">
+                <div class="col-sm-12">
+                  <input class="form-control" type="file" id="formFile">
+                </div>
               </div>
-            </div>
 
 
-            <button type="submit" class="btn btn-full">Update</button>
-        </form>
+              <button type="submit" class="btn" style="width:100%">Update</button>
+          </form>
 
-          
+            
+          </div>
         </div>
-      </div>
 
-        </center>
+          </center>
+    </div>
   </div>
+
+</main>
 {% endblock content %}

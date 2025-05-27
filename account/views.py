@@ -1,5 +1,5 @@
 from decimal import Decimal
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.conf import settings
@@ -19,7 +19,7 @@ from super.models import Role, Trader, NewCoin, Crypto, Forex, StockList
 from datetime import datetime
 import pytz
 import requests
-from .functions import activateEmail, telegram
+from .functions import activateEmail, telegram, usd_to_btc
 from .tokens import account_activation_token
 
 
@@ -30,6 +30,9 @@ from .tokens import account_activation_token
 def home(request):
     user = request.user
     copied_trade = CopiedTrade.objects.filter(user=user).count()
+
+    balance_btc = usd_to_btc(user.user_balance)
+    deposite_btc = usd_to_btc(user.user_deposite)
     
     # Fetch all trades for this user
     all_trades = TakeTrade.objects.filter(user=user)
@@ -56,6 +59,8 @@ def home(request):
         'trade': copied_trade,
         'open': open_trades,
         'close': close_trades,
+        'balance_btc': balance_btc,
+        'deposite_btc': deposite_btc,
     }
     return render(request, 'account/home.html', context)
 
@@ -148,27 +153,53 @@ def depositeMining(request,ref):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
-def payment(request,ref):
-    payment = Deposite.objects.get(ref=ref)
-    current_datetime = datetime.now()
-    date_datetime = payment.expire_time
+def payment(request, ref):
+    payment = get_object_or_404(Deposite, ref=ref)
+    current_datetime = timezone.now()
+    
+    # Ensure expire_time is timezone-aware
+    expire_time = payment.expire_time
+    if expire_time.tzinfo is None:
+        expire_time = expire_time.replace(tzinfo=pytz.utc)
+    
+    # Check for expiration and update status if needed
+    if payment.status != 3 and current_datetime >= expire_time:
+        payment.status = 3
+        payment.save()
+        return redirect('payment', ref)
 
-    date_datetime = date_datetime.replace(tzinfo=pytz.utc)
-    current_datetime = current_datetime.replace(tzinfo=pytz.utc)
-    if current_datetime >= date_datetime and payment.expire_time != 2:
-        Deposite.objects.filter(ref=ref).update(status=3)
-        return redirect('payment',ref)
     if request.method == 'POST':
         return redirect('upload-prove', ref)
-    context = {'plan':payment}
-    return render(request, 'account/payment.html',context)
+    
+    remaining_seconds = int((expire_time - current_datetime).total_seconds())
+
+    context = {
+        'plan': payment,
+        'remaining_seconds': max(0, remaining_seconds),
+    }
+    return render(request, 'account/payment.html', context)
+
+# def payment(request,ref):
+#     payment = Deposite.objects.get(ref=ref)
+#     current_datetime = datetime.now()
+#     date_datetime = payment.expire_time
+
+#     date_datetime = date_datetime.replace(tzinfo=pytz.utc)
+#     current_datetime = current_datetime.replace(tzinfo=pytz.utc)
+#     if current_datetime >= date_datetime and payment.expire_time != 2:
+#         Deposite.objects.filter(ref=ref).update(status=3)
+#         return redirect('payment',ref)
+#     if request.method == 'POST':
+#         return redirect('upload-prove', ref)
+#     context = {'plan':payment}
+#     return render(request, 'account/payment.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
 def uploadProve(request, ref):
     form = ProveForm()
+    deposite = Deposite.objects.get(ref=ref)
     if request.method == 'POST':
-        deposite = Deposite.objects.get(ref=ref)
         form = ProveForm(request.POST, request.FILES, instance=deposite)
         if form.is_valid():
             form.save()
@@ -177,8 +208,8 @@ def uploadProve(request, ref):
             telegram(f'Hello admin, a deposite upload has been made by {getUser.user.username}')
             messages.success(request, 'Successful')
             return redirect('depositelist')
-    context = {'form':form}
-    return render(request, 'account/uploadprove.html',context)
+    context = {'form':form, 'deposite':deposite}
+    return render(request, 'account/uploadproof.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])

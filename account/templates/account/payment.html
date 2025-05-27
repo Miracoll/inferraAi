@@ -1,77 +1,99 @@
 {% extends 'account/main.html' %}
+{% load static %}
+
 {% block content %}
-    <div>
-      <div>
 
-        
-        <center>
-         <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-4">
-            <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
+<main id="main" class="main">
 
-            <div>
-              <p>SEND ${{plan.amount}} WORTH OF {{plan.payment_method.abbr}}</p>
-              <p>TO THE WALLET ADDRESS BELOW OR SCAN THE QR CODE WITH YOUR WALLET APP</p>
-              <p style="margin-bottom: 5px;">please send only {{plan.payment_method.currency}} to this address, sending any other token may result in permanent loss</p>
+  <section class="payment-section">
+    <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card shadow rounded p-4 text-center">
 
-              <div class="input-field"><i class="material-icons prefix">content_copy</i><input type="text" value="{{plan.payment_method.address}}" style="text-align: center;"></div>
+          <h2 class="mb-3">Make Payment</h2>
 
-              <div><img src="{{plan.payment_method.qrcode.url}}" width="120" height="120" alt="{{plan.address}}"></div>
+          <p><strong>SEND ${{plan.amount}} WORTH OF {{plan.payment_method.abbr}}</strong></p>
+          <p>TO THE WALLET ADDRESS BELOW OR SCAN THE QR CODE WITH YOUR WALLET APP.</p>
+          <p class="text-danger" style="margin-bottom: 10px;">
+            Please send only {{plan.payment_method.currency}} to this address.<br>
+            Sending any other token may result in permanent loss.
+          </p>
 
-              <br>
-              <br>
-              <div id="timer">
-                
-              </div>
-              <!-- <div id="final-box">{{plan.date_created|date:"M d, Y H:m:s"}}</div> -->
-              <div id="event-box">
-                <p>Awaiting Payment</p>
-                <div>Payment expires {{plan.expire_time|date:"M d, Y H:m:s"}}</div>
-              </div>
-              <!-- <div id="countdown-box">
-                <div class="spinner-border"></div>
-              </div> -->
-              
-              <!-- <script type="text/javascript">
-var timeoutHandle;
-function countdown(minutes) {
-    var seconds = 60;
-    var mins = minutes
-    function tick() {
-        var counter = document.getElementById("timer");
-        var current_minutes = mins-1
-        seconds--;
-        counter.innerHTML =
-            current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-        if( seconds > 0 ) {
-            timeoutHandle=setTimeout(tick, 1000);
-        } else {
-            if(mins > 1){
-                
-                setTimeout(function () { countdown(mins - 1); }, 1000); }
-        }
-    }
-    tick();
-}
-countdown('<?php echo $time; ?>');
-</script> -->
-              <form action="" method="post">
-                {% csrf_token %}
-                <button class="btn">UPLOAD PAYMENT PROOF</button>
-              </form>
-              
-              <br>
-              <br>
-              <a class="btn btn-secondary" href="{% url 'depositelist' %}">WAIT FOR CONFIRMATION</a>
+          
+          <div class="input-group mb-1">
+            <input type="text" id="walletAddress" class="form-control text-center" value="{{plan.payment_method.address}}" style="font-size: 14px; padding: 8px 10px;" readonly>
+            <button class="btn btn-outline-secondary" type="button" id="copyBtn" title="Copy to clipboard" style="padding: 4px 8px;">
+              <i class="material-icons" style="font-size: 18px;">content_copy</i>
+            </button>
+          </div>
+          <div id="copyFeedback" style="display:none; color: green; font-size: 14px; margin-bottom: 10px;">Address copied!</div>
 
-            </div>
-
-            </div>
+          
+          <div class="mb-4">
+            <img src="{{plan.payment_method.qrcode.url}}"
+              alt="{{plan.currency}} Wallet QR Code" class="img-fluid">
           </div>
 
-            </center>
+          
+          <div id="timer" class="fs-5 fw-bold mb-3 text-primary">Loading timer...</div>
+
+          <form action="" method="post">
+            {% csrf_token %}
+            <button class="btn mb-2 w-100">UPLOAD PAYMENT PROOF</button>
+          </form>
+          <a class="btn  w-100" href="{% url 'depositelist' %}">WAIT FOR CONFIRMATION</a>
+
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- Countdown Timer Script -->
+  <script type="text/javascript">
+    var remainingSeconds = {{ remaining_seconds|default:0 }};
+  
+    function formatTime(seconds) {
+      var mins = Math.floor(seconds / 60);
+      var secs = seconds % 60;
+      return (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+  
+    function startCountdown(duration) {
+      var display = document.getElementById("timer");
+      var timer = duration;
+  
+      var interval = setInterval(function () {
+        display.textContent = formatTime(timer);
+        if (--timer < 0) {
+          clearInterval(interval);
+          display.textContent = "Time expired";
+          // Optional: disable buttons or redirect
+          // document.querySelectorAll("a.btn").forEach(btn => btn.classList.add('disabled'));
+        }
+      }, 1000);
+    }
+  
+    window.onload = function () {
+      startCountdown(remainingSeconds);
+    };
+  </script>
+
+  <!-- Copy to Clipboard Script -->
+  <script>
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      var walletInput = document.getElementById("walletAddress");
+      walletInput.select();
+      walletInput.setSelectionRange(0, 99999); // For mobile devices
+      navigator.clipboard.writeText(walletInput.value).then(() => {
+        var feedback = document.getElementById("copyFeedback");
+        feedback.style.display = "block";
+        setTimeout(() => { feedback.style.display = "none"; }, 2000);
+      });
+    });
+  </script>
+
+  <!-- Optional: Include Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</main>
 {% endblock content %}

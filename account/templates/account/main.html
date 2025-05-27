@@ -6,16 +6,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Trading - InferraAi</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>Dashboard</title>
 
   <!-- Favicons -->
-  <link rel="shortcut icon" href="{% static 'frontpage/img/favicon.svg' %}" type="image/x-icon">
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Nunito:300,400,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -25,250 +23,136 @@
   <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
 
-  <meta name="referrer" content="no-referrer-when-downgrade">
-<style type="text/css">
-  #main {
-   margin-top: 60px;
- }
- 
- 
-         .dark{
-             background-color: #222;
-             color: #e6e6e6;
-         }
- 
- </style>
+  <style>
+    #main {
+      margin-top: 60px;
+      padding-bottom: 60px; /* Add padding to prevent content from being hidden behind fixed footer */
+    }
+
+   
+     
+    .tab a.active {
+      color: #951e3d;
+    }
+
+    .tab span.material-icons {
+      margin-bottom: 4px;
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-
-
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-
     <div class="d-flex align-items-center justify-content-between">
+      <a data-target="mobile-demo" class="sidenav-trigger show-on-large">
+        <span class="material-icons toggle-sidebar-btn">menu</span>
+      </a>
       
-      <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
-      <a data-target="mobile-demo" class="sidenav-trigger show-on-large ">
-        <span class="material-icons toggle-sidebar-btn" style="font-size: 33px;">menu</span>
+      <a class="navbar-brand" href="{% url 'home' %}">
+       <img src="{% static 'assets/img/Asset 1.png' %}" alt="logo" width="175" height="50" class="d-inline-block">
       </a>
-      <a href="{% url 'login' %}" class="logo d-flex align-items-center">
-        <span class=" d-sm-block">
-          <img src="{% static 'frontpage/img/user/Asset 1.png' %}" alt="logo" width="175" height="50" class="d-inline-block">
-        </span> 
-      </a>
-    </div><!-- End Logo -->
 
+    </div>
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
-        <li><span class="flag-icon flag-icon-gb "></span></li>
-      
-        <li class="nav-item  pe-4">
-
-          <a href="{% url 'logout' %}" class="logo"><span class="d-none d-md-block ps-4">Logout </span></a> 
-
+        <li class="nav-item pe-4">
+          <a href="" class="logout-link" ><span class="d-none d-md-block ps-4">Logout</span></a>
         </li>
-
         <li>
-          <div class="mode">
-            <span class="change material-icons notranslate undefined">light_mode</span> 
-          </div>
+          <span id="theme-toggle" class="material-icons notranslate" style="cursor: pointer;">dark_mode</span>
         </li>
-
       </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
+    </nav>
+  </header>
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
-      
       <li>
         <div class="user-view">
           <div class="background">
-            <img src="{% static 'assets/img/Office.jpg' %}"></div>
-            <a href="#user">
-              <img class="circle" src="{{user.image.url}}" width="100px" height="100px">
-            </a><span class="white-text name">{{user.first_name}} {{user.last_name}}</span><span class="white-text email">{{user.email}}</span>
+            <img src="{% static 'assets/img/Office.jpg' %}">
           </div>
-        </li>
+          <a href="#user">
+            <img class="circle" src="{% static 'assets/img/camera.png' %}">
+          </a>
+          <span class="name">{{user.last_name}} {{user.first_name}}</span>
+          <span class="email">{{user.email}}<span>
+        </div>
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="material-icons notranslate">arrow_drop_down</i><span>Theme</span>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          
-          <li>
-            <a href="">
-              <span class="material-icons notranslate">bookmark</span><span>Dark</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="">
-              <span class="material-icons notranslate">bookmark_border</span><span>Light</span>
-            </a>
-          </li>
-
+        <ul id="forms-nav" class="nav-content">
+          <li><a href="{% url 'home' %}"><span class="material-icons notranslate">home</span><span>Home</span></a></li>
+          <li><a href="{% url 'pricing' %}"><span class="material-icons notranslate">sell</span><span>Plans</span></a></li>
+          <li><a href="{% url 'market' %}"><span class="material-icons notranslate">store</span><span>Market</span></a></li>
+          <li><a href="{% url 'depositelist' %}"><span class="material-icons notranslate">input</span><span>Deposit</span></a></li>
+          <li><a href="{% url 'account' %}"><span class="material-icons notranslate">account_circle</span><span>My Account</span></a></li>
+          <li><a href="{% url 'refferals' %}"><span class="material-icons notranslate">supervisor_account</span><span>My Referrals</span></a></li>
+          <li><a href="{% url 'withdrawals' %}"><span class="material-icons notranslate">payments</span><span>Withdrawals</span></a></li>
+          <li><a href="{% url 'buy' %}"><span class="material-icons notranslate">shopping_bag</span><span>Buy Crypto</span></a></li>
+          <li><a href="{% url 'logout' %}"><span class="material-icons notranslate">power_settings_new</span><span>Sign Out</span></a></li>
         </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="material-icons notranslate">arrow_drop_down</i><span>Pages</span>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'home' %}">
-              <span class="material-icons notranslate">home</span><span>Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'pricing' %}">
-              <span class="material-icons notranslate">sell</span><span>Plans</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'market' %}">
-              <span class="material-icons notranslate">store</span><span>Market</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'depositelist' %}">
-              <span class="material-icons notranslate">input</span><span>Deposit</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'account' %}">
-              <span class="material-icons notranslate">account_circle</span><span>My Account</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'refferals' %}">
-             <span class="material-icons notranslate">supervisor_account</span> <span>My Referrals</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'withdrawals' %}">
-             <span class="material-icons notranslate">payments</span> <span>Withdrawals</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'buy' %}">
-              <span class="material-icons notranslate">shopping_bag</span><span>Buy Crypto</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'logout' %}">
-             <span class="material-icons notranslate">power_settings_new</span> <span>Sign Out</span>
-            </a>
-          </li>
-
-
-
-        </ul>
-      </li><!-- End Forms Nav -->
-
+      </li>
     </ul>
+  </aside>
 
-  </aside><!-- End Sidebar-->
+  {% block content %}
+  {% endblock content %}
 
-  <main id="main" class="main mt-5">
-    {% block content %}
-    {% endblock content %}
-  </main><!-- End #main -->
-  
-
-  {% block footer %}
-  {% endblock footer %}
-
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="fixed-footer mobile-bg">
+      <ul class="tabs">
+        <li class="tab">
+          <a href="{% url 'home' %}" data-tab="trading"><span class="material-icons notranslate">bar_chart</span><span class="hide-on-med-and-down">Trading</span></a>
+        </li>
+        <li class="tab">
+         <a href="javascript:history.back()" data-tab="back"><span class="material-icons notranslate">arrow_back</span><span class="hide-on-med-and-down">Back</span></a>
+        </li>
+        <li class="tab">
+          <a href="markets.html" data-tab="markets"><span class="material-icons notranslate">store</span><span class="hide-on-med-and-down">Markets</span></a>
+        </li>
+        <li class="tab">
+          <a href="javascript:history.forward()" data-tab="forward"><span class="material-icons notranslate">arrow_forward</span><span class="hide-on-med-and-down">Forward</span></a>
+        </li>
+        <li class="tab">
+          <a href="{% url 'account' %}" data-tab="account"><span class="material-icons notranslate">person</span><span class="hide-on-med-and-down">Account</span></a>
+        </li>
+      </ul>
+    </div>
+  </footer><!-- End Footer -->
 
   <!-- Vendor JS Files -->
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <script src=
-  "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js">
-      </script>
-  <script>
-          $( ".change" ).on("click", function() {
-              if( $( "body" ).hasClass( "dark" )) {
-                  $( "body" ).removeClass( "dark" );
-                  $( ".change" ).html( '<span class="change material-icons notranslate undefined">light_mode</span>');
-              } else {
-                  $( "body" ).addClass( "dark" );
-                  $( ".change" ).html( '<span class="change material-icons notranslate undefined">dark_mode</span>');
-              }
-          });
-      </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="{% static 'toastr/toastr.min.js' %}"></script>
-    <script>
-        $(function(){
-            toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "10000",
-            "extendedTimeOut": "6000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-        {% if messages %}
-        {% for message in messages %}
-            toastr.{{ message.tags }}("{{ message }}")
-        {% endfor %}
-        {% endif %}
-
-        });
-    </script>
-  <script src="{% static 'assets/js/counter.js' %}"></script>
+  {% block another_script %}
+  {% endblock another_script %}
   <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
   <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
   <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
   <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
 
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/642888534247f20fefe94878/1gsv59386';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      themeToggle.textContent = document.body.classList.contains('dark-mode') ? 'light_mode' : 'dark_mode';
+    });
   </script>
-  <!--End of Tawk.to Script-->
 </body>
 
 </html>

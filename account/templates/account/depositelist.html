@@ -1,94 +1,75 @@
 {% extends 'account/main.html' %}
+{% load static %}
 {% load humanize %}
-{% block content %}
-<div style="padding: 20px;"></div>
 
-    <center><a class="btn" href="{% url 'crypto' %}" style="font-size: 14px; margin-bottom: 10px;">NEW DEPOSIT</a>
-      <div class="col-xxl-4 col-xl-10" style="padding-left: 10px; padding-right: 10px;">
-        <div class="alert alert-light border-light alert-dismissible fade show over" role="alert" style="text-align: left; padding-top:5px; padding-bottom: 5px; margin-bottom: 0px; font-size: 15px; line-height: 17px;">
-                   Deposits will be pending until there are sufficent confirmations on the blockchain.
-         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"  style="padding-top:5px;"></button>
+{% block content %}
+
+<main id="main" class="main py-3 py-md-4" >
+  <div class="container">
+    <!-- Deposit Header Section -->
+    <div class="row justify-content-center mb-3 mb-md-4">
+      <div class="col-12 col-xxl-6 col-xl-8 col-lg-10">
+        <div class="d-flex flex-column align-items-center">
+          <a class="btn  btn-sm mb-2 mb-md-3 w-100 w-md-auto" href="{% url 'crypto' %}">
+            NEW DEPOSIT
+          </a>
+          
+          <div class="alert alert-light border-light alert-dismissible fade show w-100" role="alert">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-info-circle me-2"></i>
+              <div class="small">Deposits will be pending until confirmed on blockchain.</div>
+              <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-    
-    </center>
+    <!-- Deposit Cards Section -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-xxl-6 col-xl-8 col-lg-10">
 
-    <!-- Customers Card -->
-    {% for deposite in deposite %}
-    <center >
- 
-        <div class="col-xxl-4 col-xl-10" >
 
-            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
 
-            <div class="card-body ">
-
-                <div class="app-flex " style="align-items: center;">
-                    <div style="flex: 0.8 1 0%;">
-                    <center>
-                        <p class="app-trading-month text-uppercase">{{ deposite.date_created|date:"M" }}</p>
-                        <span class="app-trading-day">{{ deposite.date_created|date:"d" }}</span>
-                    </center>
-                    </div>
-                <div style="flex: 3 1 0%; text-align: left;">
-                    <br>
-                    <span>${{deposite.amount|intcomma}}</span>
-                    <br>
-                    <span> {{deposite.payment_method.abbr}}</span>
-                    {% if deposite.status == 2 %}
-                    <p>{{deposite.plan}}  (Successful)</p>
-                    {% else %}
-                    <p>{{deposite.plan}}  (Pending)</p>
-                    {% endif %}
+        {% for deposite in deposite %}
+        <div class="card mb-2 mb-md-3">
+          <div class="card-body p-2 p-md-3">
+            <div class="d-flex align-items-center flex-wrap">
+              <!-- Date Badge -->
+              <div class="bg-light rounded text-center p-1 p-md-2 me-2 me-md-3 mb-1 mb-md-0" style="min-width: 50px;">
+                <div class="text-uppercase text-muted small">{{ deposite.date_created|date:"M" }}</div>
+                <div class="fw-bold h6 h5-md mb-0">{{ deposite.date_created|date:"d" }}</div>
+              </div>
+              
+              <!-- Deposit Info -->
+              <div class="flex-grow-1 me-2 me-md-3">
+                <div class="d-flex flex-column">
+                  <span class="fw-bold fs-6 fs-md-5">${{deposite.amount|intcomma}}</span>
+                  <span class="text-muted small">{{deposite.payment_method.abbr}}</span>
+                  {% if deposite.status == 2 %}
+                  <span class="badge bg-success text-dark mt-1 align-self-start py-1 px-2">Trading (Successful)</span>
+                  {% else %}
+                  <span class="badge bg-warning text-dark mt-1 align-self-start py-1 px-2">Trading (Pending)</span>
+                  {% endif %}
                 </div>
-
-                <div style="flex: 0.7 1 0%;">
-                    <a href="{% url 'payment' deposite.ref %}">PAY</a>
-                </div>
-
-                </div>
+              </div>
+              
+              <!-- Action Button -->
+              <div class="mt-2 mt-md-0 ms-auto">
+                <a href="{% url 'payment' deposite.ref %}" class="btn btn-secondary btn-sm">PAY</a>
+              </div>
             </div>
-            </div>
-
+          </div>
         </div>
-    </center>
-    {% endfor %}
+        {% endfor %}
 
-    {% comment %}
-    <center >
- 
-        <div class="col-xxl-4 col-xl-10" >
 
-            <div class="card info-card customers-card over" style="margin-bottom: 0px;">
 
-            <div class="card-body ">
 
-                <div class="app-flex " style="align-items: center;">
-                    <div style="flex: 0.8 1 0%;">
-                    <center>
-                        <p class="app-trading-month">MAR</p>
-                        <span class="app-trading-day">10</span>
-                    </center>
-                    </div>
-                <div style="flex: 3 1 0%; text-align: left;">
-                    <br>
-                    <span>$123,456,789.00</span>
-                    <br>
-                    <span> USDT</span>
-                    <p>Trading  (Pending)</p>
-                </div>
+        
+      </div>
+    </div>
+  </div>
+</main><!-- End #main -->
 
-                <div style="flex: 0.7 1 0%;">
-                    <a href="/user/deposits/176">PAY</a>
-                </div>
-
-                </div>
-            </div>
-            </div>
-
-        </div>
-    </center>
-    {% endcomment %}
-</div>
 {% endblock content %}

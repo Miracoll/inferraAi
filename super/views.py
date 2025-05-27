@@ -488,79 +488,59 @@ def addCoinPic(request):
 @allowed_users(allowed_roles=['super'])
 def addCrypto(request):
     if request.method == 'POST':
-        coin = request.POST.get('coin')
-        quantity = request.POST.get('quantity')
-        if coin == 'crypto':
-            url = f'https://fcsapi.com/api-v3/{coin}/list?type={coin}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-            r = requests.get(url = url)
-            
-            data = r.json()
-            extract_data = data.get('response')
-            total = len(extract_data)
-            print(extract_data)
-            counter = 0
-            for i in extract_data:
-                print(i['name'], coin, quantity, counter)
-                if Cur.objects.filter(name=i['name'], type=coin).exists():
-                    counter += 1
-                    print(f'Added {counter} of {total}')
-                    continue
-                else:
-                    if counter >= int(quantity):
-                        break
-                    Cur.objects.create(code=i['id'], symbol=i['symbol'], name=i['name'], decimal=i['decimal'], type=coin)
-                    counter += 1
-                    print(f'Added {counter} of {total}')
-                
-            messages.success(request, 'Done')
-            return redirect('admin-set-coin')
-        if coin == 'forex':
-            url = f'https://fcsapi.com/api-v3/{coin}/list?type={coin}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-            r = requests.get(url = url)
-            
-            data = r.json()
-            extract_data = data.get('response')
-            total = len(extract_data)
-            counter = 0
-            for i in extract_data:
-                print(i)
-                print(i['name'], coin, quantity, counter)
-                if Cur.objects.filter(name=i['name'], type=coin).exists():
-                    counter += 1
-                    print(f'Added {counter} of {total}')
-                    continue
-                else:
-                    if counter >= int(quantity):
-                        break
-                    Cur.objects.create(code=i['id'], symbol=i['symbol'], name=i['name'], decimal=i['decimal'], type=coin)
-                    counter += 1
-                    print(f'Added {counter} of {total}')
-                # break
-                
-            messages.success(request, 'Done')
-            return redirect('admin-set-coin')
-        if coin == 'stock':
+        coin_type = request.POST.get('coin')  # 'crypto', 'forex', or 'stock'
+        quantity = int(request.POST.get('quantity', 0))
+
+        # Determine URL
+        if coin_type == 'stock':
             url = f'https://fcsapi.com/api-v3/stock/list?country=United-states&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-            r = requests.get(url = url)
-            
-            data = r.json()
-            extract_data = data.get('response')
-            print(extract_data)
-            total = len(extract_data)
-            counter = 0
-            for i in extract_data:
-                if Cur.objects.filter(name=i['name'], type=coin).exists():
-                    counter += 1
-                    print(f'Added {counter} of {total}')
-                    continue
-                else:
-                    if counter >= int(quantity):
-                        break
-                    Cur.objects.create(code=i['short_name'], symbol=i['ccy'], name=i['name'], decimal=15, type=coin)
-                    counter += 1
-                    print(f'Added {counter} of {total}')
-            messages.success(request, 'Done')
+        elif coin_type in ['crypto', 'forex']:
+            url = f'https://fcsapi.com/api-v3/{coin_type}/list?type={coin_type}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
+        else:
+            messages.error(request, 'Invalid coin type')
             return redirect('admin-set-coin')
+
+        # Fetch and parse data
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
+            extract_data = data.get('response', [])
+        except Exception as e:
+            messages.error(request, f"API Error: {str(e)}")
+            return redirect('admin-set-coin')
+
+        # Add coins
+        counter = 0
+        for item in extract_data:
+            name = item.get('name')
+            if Cur.objects.filter(name=name, type=coin_type).exists():
+                continue
+
+            if counter >= quantity:
+                break
+
+            if coin_type == 'stock':
+                Cur.objects.create(
+                    code=item.get('short_name', ''),
+                    symbol=item.get('ccy', ''),
+                    name=name,
+                    decimal=15,
+                    type=coin_type
+                )
+            else:
+                Cur.objects.create(
+                    code=item.get('id', ''),
+                    symbol=item.get('symbol', ''),
+                    name=name,
+                    decimal=item.get('decimal', 15),
+                    type=coin_type
+                )
+            counter += 1
+            print(f'Added {counter} of {len(extract_data)}')
+
+        messages.success(request, 'Done')
+        return redirect('admin-set-coin')
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['super'])
@@ -647,110 +627,81 @@ def addCryptoPic(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['super'])
 def setCoin(request):
-    apicrypto = 0
-    apiforex = 0
-    apistock = 0
-    availablecrypto = 0
-    availableforex = 0
-    availablestock = 0
-    
-    coins = {}
-    crypto = {}
-    forex = {}
-    
-    apilist = ['crypto', 'forex', 'stock']
-    apitotal = []
-    available = ['crypto', 'forex', 'stock']
-    availabletotal = []
-    
-    for i in apilist:
-        if i == 'crypto':
-            url = f'https://fcsapi.com/api-v3/forex/list?type={i}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-            r = requests.get(url = url)
-            data = r.json()
-            extract_data = data.get('response')
-            apicrypto = len(extract_data)
-            gotten_crypto = len(Cur.objects.filter(type='crypto'))
-            
-        elif i == 'forex':
-            url = f'https://fcsapi.com/api-v3/forex/list?type={i}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-            r = requests.get(url = url)
-            data = r.json()
-            extract_data = data.get('response')
-            apiforex = len(extract_data)
-            gotten_forex = len(Cur.objects.filter(type='forex'))
-            
+    api_key = 'ZHsDL3TSCuAT0xq9iQfI3wz'
+    apidata = {'crypto': 0, 'forex': 0, 'stock': 0}
+    availabledata = {'crypto': 0, 'forex': 0, 'stock': 0}
+    gotten = {'crypto': 0, 'forex': 0, 'stock': 0}
+
+    coins, crypto, forex = {}, {}, {}
+
+    # --- Fetch from API and database ---
+    for coin_type in ['crypto', 'forex', 'stock']:
+        if coin_type == 'stock':
+            url = f'https://fcsapi.com/api-v3/stock/list?country=United-states,Japan&access_key={api_key}'
         else:
-            url = f'https://fcsapi.com/api-v3/stock/list?country=United-states,Japan&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-            r = requests.get(url = url)
-            data = r.json()
-            extract_data = data.get('response')
-            apistock = len(extract_data)
-            gotten_stock = len(Cur.objects.filter(type='stock'))
-        
-    for i in available:
-        if i == 'crypto':
-            coin = NewCoin.objects.filter(type=i)
-            availablecrypto = len(coin)
-        elif i == 'forex':
-            coin = NewCoin.objects.filter(type=i)
-            availableforex = len(coin)
-        else:
-            coin = NewCoin.objects.filter(type=i)
-            availablestock = len(coin)
-            
+            url = f'https://fcsapi.com/api-v3/forex/list?type={coin_type}&access_key={api_key}'
+
+        response = requests.get(url).json()
+        extract_data = response.get('response', [])
+        apidata[coin_type] = len(extract_data)
+        gotten[coin_type] = Cur.objects.filter(type=coin_type).count()
+        availabledata[coin_type] = NewCoin.objects.filter(type=coin_type).count()
+
+    # --- Search functionality ---
     if 'stock' in request.POST:
         istock = request.POST.get('mstock')
-        coins = Cur.objects.filter(name__contains=istock, type='stock')
-        
+        coins = Cur.objects.filter(name__icontains=istock, type='stock')
+
     elif 'crypto' in request.POST:
         istock = request.POST.get('mmstock')
-        crypto = Cur.objects.filter(name__contains=istock, type='crypto')
-        print(crypto)
-        
+        crypto = Cur.objects.filter(name__icontains=istock, type='crypto')
+
     elif 'forex' in request.POST:
         istock = request.POST.get('mmmstock')
-        forex = Cur.objects.filter(name__contains=istock, type='forex')
-        print(forex)
-        
+        forex = Cur.objects.filter(name__icontains=istock, type='forex')
+
+    # --- Country-based stock fetching ---
     if 'country' in request.POST:
-        cnt = request.POST.get('mcountry').capitalize()
-        url = f'https://fcsapi.com/api-v3/stock/list?country={cnt}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
-        r = requests.get(url = url)
-        
-        data = r.json()
-        extract_data = data.get('response')
-        if extract_data is None:
+        country = request.POST.get('mcountry').capitalize()
+        url = f'https://fcsapi.com/api-v3/stock/list?country={country}&access_key={api_key}'
+        response = requests.get(url).json()
+        extract_data = response.get('response')
+
+        if not extract_data:
             messages.warning(request, 'No data found')
             return redirect('admin-set-coin')
+
         total = len(extract_data)
         counter = 0
-        for i in extract_data:
-            if Cur.objects.filter(name=i['name'], type='stock').exists():
-                counter += 1
-                print(f'Added {counter} of {total}')
-                continue
-            else:
-                Cur.objects.create(code=i['short_name'], symbol=i['ccy'], name=i['name'], decimal=15, type='stock')
-                counter += 1
-                print(f'Added {counter} of {total}')
+        for item in extract_data:
+            if not Cur.objects.filter(name=item['name'], type='stock').exists():
+                Cur.objects.create(
+                    code=item['short_name'],
+                    symbol=item['ccy'],
+                    name=item['name'],
+                    decimal=15,
+                    type='stock'
+                )
+            counter += 1
+            print(f'Added {counter} of {total}')
+
         messages.success(request, 'Done')
         return redirect('admin-set-coin')
-    
-    
+
+    # --- Final context ---
     context = {
-        'gotten_crypto':gotten_crypto,
-        'gotten_forex':gotten_forex,
-        'gotten_stock':gotten_stock,
-        'apicrypto':apicrypto,
-        'apiforex':apiforex,
-        'apistock':apistock,
-        'availablecrypto':availablecrypto,
-        'availableforex':availableforex,
-        'availablestock':availablestock,
-        'coin':coins,
-        'forex':forex,
-        'crypto':crypto,
+        'gotten_crypto': gotten['crypto'],
+        'gotten_forex': gotten['forex'],
+        'gotten_stock': gotten['stock'],
+        'apicrypto': apidata['crypto'],
+        'apiforex': apidata['forex'],
+        'apistock': apidata['stock'],
+        'availablecrypto': availabledata['crypto'],
+        'availableforex': availabledata['forex'],
+        'availablestock': availabledata['stock'],
+        'coin': coins,
+        'crypto': crypto,
+        'forex': forex,
     }
     return render(request, 'super/addcrypto.html', context)
 
