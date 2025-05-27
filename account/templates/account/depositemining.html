@@ -1,0 +1,77 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div>
+
+
+    <center>
+
+      <div>
+      <p style="font-weight: bold;">FUND YOUR ACCOUNT</p>
+      <p><a href="pricing.html" style="font-size: 19px; color: #fc5a3f;">VIEW PRICING</a></p>
+      <p><a href="buy.html" style="font-size: 19px; color: #fc5a3f;">BUY CRYPTO NOW</a></p>
+    </div>
+
+    </center>
+    
+    <center>
+     <!-- Customers Card -->
+        <div class="col-xxl-4 col-xl-4">
+
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+          <!-- Floating Labels Form -->
+          <form class="row g-3" method="POST">
+            {% csrf_token %}
+            <div class="row mb-3">
+              <label class="col col-form-label">USD</label>
+               <div class="col-9">
+                 {% if plan.max_amount != None %}
+                <input type="number" min="500" class="form-control" name="amount" placeholder="Amount" value="{{ plan.max_amount }}">
+                {% else %}
+                <input type="number" min="500" class="form-control" name="amount" placeholder="Amount" value="{{ plan.min_amount }}">
+                {% endif %}
+                <!-- <label for="floatingName">Amount</label> -->
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+              <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" name='paymethod' aria-label="State">
+                  {% for i in currency %}
+                  <option value="{{i.abbr}}">{{i.currency}}</option>
+                  {% endfor %}
+                </select>
+                <label for="floatingSelect">Payment Method</label>
+              </div>
+            </div>
+
+
+             <div class="col-md-12">
+              <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" name="mining" aria-label="State">
+                    <option value="Bitcoin Mining">Bitcoin Mining</option>
+                    <option value="Ethereum Mining">Ethereum Mining</option>
+                    <option value="Dogecoin Mining">Dogecoin Mining</option>
+                    <option value="Binance Coin Mining">Binance Coin Mining</option>
+                </select>
+                <label for="floatingSelect">To</label>
+              </div>
+            </div>
+
+
+           
+           <div>
+            <button type="submit" class="btn btn-full btn-secondary"> Proceed</button>
+           </div> 
+           
+          </form><!-- End floating Labels Form -->
+
+        </div>
+      </div>
+
+        </center>
+  </div>
+{% endblock content %}

@@ -15,8 +15,8 @@
 
             <div class="col-xxl-4 col-xl-6" style="padding-top: 30px;">
               <center><img src="{% static 'assets/img/camera.png' %}" class="circle" height="150px">
-                <h2>John Lak</h2>
-                <p>johnlak304@gmail.com</p>
+                <h2>{{user.last_name}} {{user.first_name}}</h2>
+                <p>{{user.email}}</p>
               </center>
               <ul class="collection" style="list-style-type: none;">
 
@@ -51,7 +51,7 @@
                 </a>
 
 
-                <a class="collection-item bg" href="{% url 'selectwithdrawal' %}">
+                <a class="collection-item bg" href="{% url 'withdrawals' %}">
                   <li>
                     <div class="card info-card customers-card over" style="margin-bottom: 0px; ">
                       <div class="card-body over">

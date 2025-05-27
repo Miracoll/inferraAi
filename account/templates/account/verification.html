@@ -10,7 +10,7 @@
       <div class="fade-appear-done fade-enter-done">
         <center>
           <img src="{% static 'assets/img/camera.png' %}" class="circle" height="150px">
-          <h2>John Lak</h2>
+          <h2>{{user.last_name}} {{user.first_name}}</h2>
           <p>VERIFICATIONS</p>
         </center>
         <div class="row">
@@ -27,14 +27,19 @@
                         <span class="material-icons notranslate"
                           style="font-size: 30px; margin: 0px; padding: 0px; color: white;">mail</span>
                       </div>
-                      <span style="color: rgb(38, 166, 154);">Email Verification</span> <span
-                        style="color: silver; font-size: 12px;">Completed</span>
+                      <span style="color: rgb(38, 166, 154);">Email Verification</span>
+                      {% if user.verify_email %}
+                      <span style="color: silver; font-size: 12px;">Completed</span>
+                      {% else %}
+                      <span style="color: silver; font-size: 12px;">Pending <small><a href="">verify
+                            now</a></small></span>
+                      {% endif %}
                     </div>
                   </div>
                 </li>
               </a>
 
-              <a class="collection-item bg" href="Identity.html">
+              <a class="collection-item bg" href="{% url 'identity' %}">
                 <li>
                   <div class="card info-card customers-card over" style="margin-bottom: 0px; text-align: left;">
                     <div class="card-body over">
@@ -50,7 +55,7 @@
                 </li>
               </a>
 
-              <a class="collection-item bg" href="address.html">
+              <a class="collection-item bg" href="{% url 'address' %}">
                 <li>
                   <div class="card info-card customers-card over" style="margin-bottom: 0px;text-align: left; ">
                     <div class="card-body over">

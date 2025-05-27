@@ -29,6 +29,7 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
 
   <style>
     #main {
@@ -91,7 +92,7 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
         <li class="nav-item pe-4">
-          <a href="" class="logout-link"><span class="d-none d-md-block ps-4">Logout</span></a>
+          <a href="{% url 'logout' %}" class="logout-link"><span class="d-none d-md-block ps-4">Logout</span></a>
         </li>
         <li>
           <span id="theme-toggle" class="material-icons notranslate" style="cursor: pointer;">dark_mode</span>
@@ -337,20 +338,44 @@
                       {% for open in open %}
                       <div class="d-flex align-items-center justify-content-between flex-wrap trade-entry">
                         <div class="text-center me-3">
-                          <strong>FEB</strong><br>
-                          <span>28</span>
+                          <strong>{{ open.date_created|date:"M" }}</strong><br>
+                          <span>{{ open.date_created|date:"d" }}</span>
                         </div>
                         <div class="me-3">
-                          <img class="cryptoicons" src="{% static 'assets/img/pair-icon-aaveusd.img.svg' %}"
-                            style="width: 40px; height: 40px; border-radius: 5px;" alt="Crypto Icon">
+                          {% if open.crypto.type != 'stock' %}
+                          <img class="cryptoicons" src="{{open.crypto.image}}" width="50" height="50"
+                            style="border-radius: 5px;">
+                          {% else %}
+                          <img class="cryptoicons" src="{{open.crypto.stock_image.url}}" width="50" height="50"
+                            style="border-radius: 5px;">
+                          {% endif %}
                         </div>
                         <div class="flex-grow-1 me-3">
-                          <p class="mb-1 fw-bold">BTCUSD <span
+                          {% if open.mode == 'buy' %}
+                          <p>
+                            {% if open.crypto.type != 'stock' %}
+                            {{open.crypto.symbol|upper}}{{user.currency|upper}}
+                            {% else %}
+                            {{open.crypto.name|upper}}
+                            {% endif %}
+                            <span style="color:green;">{{open.mode|upper}}</span>
+                          </p>
+                          {% else %}
+                          <p>{{open.crypto.symbol|upper}}{{user.currency|upper}} <span
+                              style="color:red;">{{open.mode|upper}}</span> </p>
+                          {% endif %}
+                          <span style="font-size: 12px;">{{open.trader.name}} Trades</span>
+                          <!-- <p class="mb-1 fw-bold">BTCUSD <span
                               class="badge bg-danger bg-opacity-10 text-danger">SELL</span></p>
-                          <small class="text-muted">John MBA Trades</small>
+                          <small class="text-muted">John MBA Trades</small> -->
                         </div>
                         <div>
-                          <span class="text-danger fw-bold">-$91.55</span>
+                          <span class="text-danger fw-bold">
+                            {% if open.profit < 0 %} <span style="color:red;">-${{open.profit|multiply:-1}}</span>
+                          {% else %}
+                          <span style="color:green;">${{open.profit}}</span>
+                          {% endif %}
+                          </span>
                         </div>
                       </div>
                       {% endfor %}
@@ -446,6 +471,35 @@
   </footer><!-- End Footer -->
 
   <!-- Vendor JS Files -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="{% static 'toastr/toastr.min.js' %}"></script>
+  <script>
+    $(function () {
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "10000",
+        "extendedTimeOut": "6000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
+      {% if messages %}
+      {% for message in messages %}
+      toastr.{ { message.tags } } ("{{ message }}")
+      {% endfor %}
+      {% endif %}
+
+    });
+  </script>
   <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>

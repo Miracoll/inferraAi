@@ -14,27 +14,28 @@
   
                 <h2>Update Email </h2>
                 <!-- Floating Labels Form -->
-                <form class="row g-3" style="padding: 50px;">
+                <form method="post" class="row g-3">
+                  {% csrf_token %}
   
-                  <p class="text-center text-muted small mb-4">Current Email: <strong>johnlak304@gmail.com</strong></p>
+                  <p class="text-center text-muted small mb-4">Current Email: <strong>{{user.email}}</strong></p>
   
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                      <input type="text" class="form-control" id="floatingName" placeholder="Your Name" name="token">
                       <label for="floatingName" style="color:#777777;">Email Token</label>
                     </div>
                   </div>
   
                    <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                      <input type="text" class="form-control" id="floatingName" placeholder="Your Name" name="email1">
                       <label for="floatingName" style="color:#777777;">New Email</label>
                     </div>
                   </div>
   
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                      <input type="text" class="form-control" id="floatingName" placeholder="Your Name" name="email2">
                       <label for="floatingName" style="color:#777777;">Confirm New Email</label>
                     </div>
                   </div>
@@ -43,15 +44,36 @@
   
   
                  <div>
-                  <button type="submit" class="btn" style="width:100%">Submit</button>
-                 </div>
-  
-                  <div>
-                  <button type="submit" class="btn btn-secondary btn-full" style="width:100%">Request Token</button>
+                  <button type="submit" name="sub" class="btn" style="width:100%">Submit</button>
                  </div>
                   
                  
                 </form><!-- End floating Labels Form -->
+
+                <br>
+
+                <div >
+                  <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="email" class="btn btn-full" style="width:100%" data-bs-toggle="modal" data-bs-target="#verticalycentered">Request Token</button>
+                  </form>
+               </div>
+                <div class="modal fade" id="verticalycentered" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Requesting Token</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h3>Request received</h3>
+                      </div>
+      
+                    </div>
+                  </div>
+                </div>
+
+                
   
               </div>
             </div>

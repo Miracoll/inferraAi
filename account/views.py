@@ -40,6 +40,7 @@ def home(request):
     current_datetime = timezone.now()
 
     for trade in all_trades:
+        print(f"Checking trade: {trade} with expire time: {trade.expire_time} at current time: {current_datetime}")
         if trade.open_trade and current_datetime >= trade.expire_time:
             # Close the trade
             trade.open_trade = False
@@ -209,7 +210,7 @@ def uploadProve(request, ref):
             messages.success(request, 'Successful')
             return redirect('depositelist')
     context = {'form':form, 'deposite':deposite}
-    return render(request, 'account/uploadproof.html',context)
+    return render(request, 'account/uploadprove.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
@@ -344,7 +345,7 @@ def updateEmail(request):
             return redirect('updateemail')
         else:
             if email1 == email2:
-                User.objects.filter(username=request.user.username).update(email=email1)
+                User.objects.filter(username=request.user.username).update(email=email1,token=None)
                 messages.success(request, 'Done')
                 return redirect('updateemail')
             else:
@@ -480,14 +481,16 @@ def bank(request):
             Withdrawal.objects.create(
                 amount=amount,payment_method=to,user=request.user,mode='bank',bank_name=bank,acct_name = acct
             )
+            # Reset withdrawal token
+            User.objects.filter(username=request.user.username).update(withdrawal_token=None)
             # Send message to admin
             telegram(f'Hello admin, {request.user.username} just placed a withdrawal via bank')
 
             messages.success(request, 'Done')
-            return redirect('bank')
+            return redirect('withdrawals')
         else:
             messages.error(request, 'Invalid withdrawal code')
-            return redirect('withdrawals')
+            return redirect('bank')
     context = {}
     return render(request, 'account/bank.html')
 
@@ -504,6 +507,8 @@ def paypal(request):
             Withdrawal.objects.create(
                 amount=amount,payment_method=to,user=request.user,mode='paypal',paypal_email=email
             )
+            # Reset withdrawal token
+            User.objects.filter(username=request.user.username).update(withdrawal_token=None)
             # Send message to admin
             telegram(f'Hello admin, {request.user.username} just placed a withdrawal via PayPal')
 
@@ -530,6 +535,8 @@ def cryptoWithdrawal(request):
             Withdrawal.objects.create(
                 amount=amount,payment_method=paymethod,user=request.user,mode='crypto',wallet_address=address
             )
+            # Reset withdrawal token
+            User.objects.filter(username=request.user.username).update(withdrawal_token=None)
             # Send message to admin
             telegram(f'Hello admin, {request.user.username} just placed a withdrawal via crypto to {to}')
 
@@ -554,6 +561,8 @@ def cashApp(request):
             Withdrawal.objects.create(
                 amount=amount,payment_method=to,user=request.user,mode='CassApp',cashapp_tag=tag
             )
+            # Reset withdrawal token
+            User.objects.filter(username=request.user.username).update(withdrawal_token=None)
             # Send message to admin
             telegram(f'Hello admin, {request.user.username} just placed a withdrawal via cashapp')
 

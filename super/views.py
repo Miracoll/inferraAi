@@ -493,9 +493,9 @@ def addCrypto(request):
 
         # Determine URL
         if coin_type == 'stock':
-            url = f'https://fcsapi.com/api-v3/stock/list?country=United-states&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
+            url = f'https://fcsapi.com/api-v3/stock/list?country=United-states&access_key=097DIrXCOPO0fkm8o7URMBrs8a3AvRK'
         elif coin_type in ['crypto', 'forex']:
-            url = f'https://fcsapi.com/api-v3/{coin_type}/list?type={coin_type}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz'
+            url = f'https://fcsapi.com/api-v3/{coin_type}/list?type={coin_type}&access_key=097DIrXCOPO0fkm8o7URMBrs8a3AvRK'
         else:
             messages.error(request, 'Invalid coin type')
             return redirect('admin-set-coin')
@@ -555,7 +555,7 @@ def addCryptoPic(request):
             for i in currency.values():
                 print(i)
                 print('----------------------------------------------------')
-                url = f"https://fcsapi.com/api-v3/crypto/profile?symbol={i.get('symbol')}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz"
+                url = f"https://fcsapi.com/api-v3/crypto/profile?symbol={i.get('symbol')}&access_key=097DIrXCOPO0fkm8o7URMBrs8a3AvRK"
                 r = requests.get(url = url)
                 data = r.json()
                 extract_data = data.get('response')
@@ -584,7 +584,7 @@ def addCryptoPic(request):
             total = len(currency)
             print(total)
             for i in currency.values():
-                url = f"https://fcsapi.com/api-v3/forex/profile?id={i.get('code')}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz"
+                url = f"https://fcsapi.com/api-v3/forex/profile?id={i.get('code')}&access_key=097DIrXCOPO0fkm8o7URMBrs8a3AvRK"
                 r = requests.get(url = url)
                 data = r.json()
                 extract_data = data.get('response')
@@ -627,7 +627,7 @@ def addCryptoPic(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['super'])
 def setCoin(request):
-    api_key = 'ZHsDL3TSCuAT0xq9iQfI3wz'
+    api_key = '097DIrXCOPO0fkm8o7URMBrs8a3AvRK'
     apidata = {'crypto': 0, 'forex': 0, 'stock': 0}
     availabledata = {'crypto': 0, 'forex': 0, 'stock': 0}
     gotten = {'crypto': 0, 'forex': 0, 'stock': 0}
@@ -725,7 +725,7 @@ def setCryptoAdd(request, ref):
         messages.warning(request, 'Already exist')
         return redirect('admin-set-coin')
     else:
-        url = f"https://fcsapi.com/api-v3/crypto/profile?symbol={currency.symbol}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz"
+        url = f"https://fcsapi.com/api-v3/crypto/profile?symbol={currency.symbol}&access_key=097DIrXCOPO0fkm8o7URMBrs8a3AvRK"
         r = requests.get(url = url)
         data = r.json()
         extract_data = data.get('response')
@@ -745,7 +745,7 @@ def setForexAdd(request, ref):
         messages.warning(request, 'Already exist')
         return redirect('admin-set-coin')
     else:
-        url = f"https://fcsapi.com/api-v3/forex/profile?id={currency.code}&access_key=ZHsDL3TSCuAT0xq9iQfI3wz"
+        url = f"https://fcsapi.com/api-v3/forex/profile?id={currency.code}&access_key=097DIrXCOPO0fkm8o7URMBrs8a3AvRK"
         r = requests.get(url = url)
         data = r.json()
         extract_data = data.get('response')

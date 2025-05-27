@@ -146,7 +146,7 @@ class TakeTrade(models.Model):
         return self.user.username
     
     def save(self, *args, **kwargs):
-        date_before = datetime.now()
+        date_before = timezone.now()
         self.expire_time = date_before + timedelta(seconds=int(self.time)*60)
         self.date_created = date_before
         super(TakeTrade, self).save(*args, **kwargs)

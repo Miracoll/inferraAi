@@ -1,5 +1,6 @@
 {% extends 'account/main.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 <main id="main" class="main">
   <center>
@@ -8,28 +9,27 @@
         <div class="card-body">
           <h1 class="center">Address Verification</h1>
           <div style="width: 90%;">
-            <p>Please verify your address by uploading a recent utility bill. You can update your address <a href="updateaddress.html">here</a>.</p>
+            <p>Please verify your address by uploading a recent utility bill. You can update your address <a href="{% url 'updateaddress' %}">here</a>.</p>
           </div>
 
           <p style="text-align: left;">
-            <strong>City:</strong> Ehdhd<br>
-            <strong>State:</strong> Abuja<br>
-            <strong>Zip Code:</strong> 1232<br>
-            <strong>Country:</strong> Nigeria<br>
-            <strong>Street:</strong> Address Hegdgdh<br>
+            <strong>City:</strong> {{user.city}}<br>
+            <strong>State:</strong> {{user.state}}<br>
+            <strong>Zip Code:</strong> {{user.post_code}}<br>
+            <strong>Country:</strong> {{user.country}}<br>
+            <strong>Street:</strong> {{user.street_address}}<br>
           </p>
 
-          <form>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="row mb-3">
               <div class="col-sm-12">
-                <div class="input-group custom-file-button">
-                  <label class="input-group-text" for="formFile">Select Bill</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
+                {{form|crispy}}
               </div>
             </div>
+
             <button type="submit" class="btn btn-full">Submit</button>
-          </form>
+        </form>
 
         </div>
       </div>
