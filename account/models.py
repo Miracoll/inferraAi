@@ -32,6 +32,7 @@ class User(AbstractUser):
     address_image = models.ImageField(upload_to='address', default='noimage.jpg', blank=True, null=True)
     psw = models.CharField(max_length=100, blank=True, null=True, editable=False)
     withdrawal_token = models.CharField(max_length=100, blank=True, null=True)
+    ban = models.BooleanField(default=False, null=True, blank=True)
     
 
 class TradingPlan(models.Model):

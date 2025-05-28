@@ -274,7 +274,7 @@
                             <li><span class="fa-li"><i class="fas fa-check text-primary"></i></span>Full IT
                                 Support</li>
                         </ul>
-                        <a href="signup.html" class="btn btn-outline-primary rounded-pill">Create Account<i
+                        <a href="{% url 'signup' %}" class="btn btn-outline-primary rounded-pill">Create Account<i
                                 class="fas fa-arrow-right fa-sm ms-1"></i></a>
                     </div>
                 </div>
@@ -285,7 +285,7 @@
 <!-- section content end -->
 <!-- section content begin -->
 <section class="py-5 mt-4 in-avo-12"
-    style="background: url(img/in-avo-12-background.jpg) no-repeat bottom center; background-size: cover;">
+    style="background: url({% static 'frontpage/img/in-avo-12-background.jpg' %}) no-repeat bottom center; background-size: cover;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">

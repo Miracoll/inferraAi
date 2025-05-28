@@ -251,7 +251,7 @@ def removeTrade(request, ref):
 @allowed_users(allowed_roles=['super'])
 def banUser(request, ref):
     if request.method == 'POST':
-        User.objects.filter(username=ref).update(is_active=False)
+        User.objects.filter(username=ref).update(is_active=False, ban=True)
         messages.success(request, 'Done')
         return redirect('admin-user-list')
     context = {}

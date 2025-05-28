@@ -275,16 +275,23 @@ def crypto(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
 def traders(request):
-    copied_id = []
     copied = CopiedTrade.objects.filter(user=request.user)
-    for i in copied:
-        copied_id.append(i.trade.id)
-    traders = Trader.objects.exclude(id__in=copied_id)
-    if request.method == 'POST':
-        hint = request.POST.get('hint')
-        traders = Trader.objects.filter(name__contains=hint)
-    context = {'traders':traders,'copied':copied}
-    return render(request, 'account/traders.html',context)
+    copied_ids = [i.trade.id for i in copied]
+
+    # Start with base queryset (exclude copied)
+    traders = Trader.objects.exclude(id__in=copied_ids)
+
+    # If there's a hint in GET, filter
+    hint = request.GET.get('hint')
+    if hint:
+        traders = traders.filter(name__icontains=hint)
+
+    context = {
+        'traders': traders,
+        'copied': copied,
+    }
+    return render(request, 'account/traders.html', context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
@@ -320,6 +327,7 @@ def cancelTrade(request, ref):
 @allowed_users(allowed_roles=['client','super'])
 def tradingPlans(request):
     plans = TradingPlan.objects.all()
+    print(plans)
     context = {'plan':plans}
     return render(request, 'account/tradingplans.html',context)
 

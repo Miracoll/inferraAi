@@ -114,6 +114,10 @@ def loginuser(request):
 
         user = authenticate(request, username=username, password=password)
 
+        if user.ban:
+            messages.error(request, 'Your account has been banned')
+            return redirect('login')
+
         if user is not None:
             login(request,user)
             if user.password_reset:
@@ -178,7 +182,7 @@ def signup(request):
 
         # Send welcome email
         welcomeEmail(request, user, email)
-        
+
         return redirect('login')
 
     content = {}
