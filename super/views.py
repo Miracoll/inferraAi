@@ -197,16 +197,35 @@ def updateUser(request, ref):
         
     elif 'message' in request.POST:
         msg = request.POST.get('message')
-        # Send mail to user
-        subject = 'InferraAI UPADTE'
+        
+        # Prepare email
+        subject = 'InferraAI UPDATE'
         recipient = [act_user.email]
+        
+        # Plain text version
         text_content = f'Dear {act_user.last_name}, {msg}'
-        html_content = f'<div><h3 style="color:purple">InferraAI</h3></div><div><p>Dear {act_user.last_name}, <br>{msg}</div>'
-        message = EmailMultiAlternatives(subject=subject, body=text_content, to=recipient)
+        
+        # HTML version
+        html_content = (
+            f'<div>'
+            f'<h3 style="color:purple">InferraAI</h3>'
+            f'<div><p>Dear {act_user.last_name}, <br>{msg}</p></div>'
+            f'</div>'
+        )
+        
+        # Send email
+        message = EmailMultiAlternatives(
+            subject=subject,
+            body=text_content,
+            to=recipient
+        )
         message.attach_alternative(html_content, 'text/html')
         message.send()
+        
+        # Feedback to admin
         messages.success(request, 'Message sent')
-        return redirect('admin-user-update',ref)
+        return redirect('admin-user-update', ref)
+
         
     context = {
         'client':act_user,
