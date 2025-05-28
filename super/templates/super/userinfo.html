@@ -141,7 +141,7 @@
 
             <div class="col-md-6">
               <div class="form-floating">
-                <input type="number" class="form-control" required id="floatingName" placeholder="Deposite" name="deposite" value="{{client.user_deposite}}">
+                <input type="number" class="form-control" required step="0.01" id="floatingName" placeholder="Deposite" name="deposite" value="{{client.user_deposite}}">
                 <label for="floatingName">Deposite</label>
               </div>
             </div>
@@ -321,7 +321,8 @@
 
           <h5 class="card-title">Send Message</h5>
           <!-- Floating Labels Form -->
-          <form class="row g-3">
+          <form class="row g-3" method="post">
+            {% csrf_token %}
 
              <div class="col-12">
               <div class="form-floating">

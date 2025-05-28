@@ -82,7 +82,7 @@
             <img src="{% static 'assets/img/Office.jpg' %}">
           </div>
           <a href="#user">
-            <img class="circle" src="{% static 'assets/img/camera.png' %}">
+            <img class="circle" src="{{user.image.url}}">
           </a>
           <span class="name">{{user.last_name}} {{user.first_name}}</span>
           <span class="email">{{user.email}}<span>

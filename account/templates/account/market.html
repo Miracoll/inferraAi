@@ -1,87 +1,23 @@
 {% extends 'account/main.html' %}
-{% load static %}
-
 {% block content %}
 <main id="main" class="main">
-  <center>
-    <div style="padding: 20px;"></div>
-
-
-  <div class="col-xxl-4 col-xl-10">
-    <div class="card over" style="margin-bottom: 0px;">
-      <div class="card-body">
-        <div class="app-flex " style="align-items: center;">
-
-
-          <div style="flex: 0.8 0 0%;">
-            <span>FEB</span><br>
-            <span>28</span>
-          </div>
-
-          <div style="flex: 0.8 1 0%;">
-            <div class="col-sm-2">
-              <center>
-                <img class="cryptoicons" src="{% static 'assets/img/pair-icon-aaveusd.img.svg' %}" style="border-radius: 5px;">
-              </center>
-            </div>
-          </div>
-
-          <div style="flex: 7 1 0%;  padding-left: 20px;">
-            <div class="">
-              <p>BTCUSD <span style="color:green;">BUY</span> </p>
-              <span style="font-size: 12px;">John MBA Trades</span>
-            </div>
-          </div>
-
-
-          <div style="margin-top: -46px;">
-            <span style="color:green;"> +$91.55</span>
-          </div>
-
-        </div>
-      </div>
+  <div style="padding: 20px;"></div>
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="col-sm-12 col-xl-12">
+      <select class="form-select" name="coin" required>
+        <option value="">--Select Currency--</option>
+        <option value="crypto">Cypto</option>
+        <option value="forex">Forex</option>
+        <option value="stock">Stock</option>
+      </select>
+      <button class="btn btn-secondary mt-1 mb-5 w-100" type="submit">Search</button>
     </div>
-  </div>
 
+  </form>
 
-
-  <div class="col-xxl-4 col-xl-10">
-    <div class="card over" style="margin-bottom: 0px;">
-      <div class="card-body">
-        <div class="app-flex " style="align-items: center;">
-
-
-          <div style="flex: 0.8 0 0%;">
-            <span>FEB</span><br>
-            <span>28</span>
-          </div>
-
-          <div style="flex: 0.8 1 0%;">
-            <div class="col-sm-2">
-              <center>
-                <img class="cryptoicons" src="{% static 'assets/img/pair-icon-aaveusd.img.svg' %}" style="border-radius: 5px;">
-              </center>
-            </div>
-          </div>
-
-          <div style="flex: 7 1 0%;  padding-left: 20px;">
-            <div class="">
-              <p>BTCUSD <span style="color:red;">SELL</span> </p>
-              <span style="font-size: 12px;">John MBA Trades</span>
-            </div>
-          </div>
-
-
-          <div style="margin-top: -46px;">
-            <span style="color:red;">-$91.55</span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xxl-4 col-xl-10">
+  {% for data in data %}
+  <div class="col-xxl-12 col-xl-12 col-sm-12">
     <div class="card over" style="margin-bottom: 0px;">
       <div class="card-body">
         <div class="app-flex " style="align-items: center;">
@@ -89,29 +25,34 @@
           <div style="flex: 0.8 1 0%;">
             <div class="col-sm-2">
               <center>
-                <img class="cryptoicons" src="{% static 'assets/img/pair-icon-adausd.img.svg' %}" style="border-radius: 5px;">
+                {% if data.type == 'stock' %}
+                <img class="cryptoicons" src="{{data.stock_image.url}}" width="60" height="60"
+                  style="border-radius: 5px;">
+                {% else %}
+                <img class="cryptoicons" src="{{data.image}}" width="60" height="60" style="border-radius: 5px;">
+                {% endif %}
               </center>
             </div>
           </div>
 
           <div style="flex: 7 1 0%;  padding-left: 20px;">
             <div class="">
-              <p>Cardano</p>
-              <span style="font-size: 12px;">ADAUSD</span>
+              <p>{{data.name | upper}}</p>
+              <span style="font-size: 12px;">{{data.symbol | upper}}</span>
             </div>
           </div>
 
           <div style="flex: 4 0 0%; margin-top: -41px;">
-            <span>0.3553803</span>
+            <span>{{data.current_price}}</span>
           </div>
-          <div style="margin-top: -46px;">
-            <span class="material-icons"><a href="" style="color: gold;"> star</a> </span>
+          <div>
+            <a style="font-size: larger;" target="_blank" href="{% url 'trading-room' data.code data.type %}">view</a>
           </div>
 
         </div>
       </div>
     </div>
   </div>
-  </center>
-</main><!-- End #main -->
+  {% endfor %}
+</main>
 {% endblock content %}

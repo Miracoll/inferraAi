@@ -178,8 +178,7 @@ def signup(request):
 
         # Send welcome email
         welcomeEmail(request, user, email)
-
-        messages.success(request, 'Registration successful')
+        
         return redirect('login')
 
     content = {}

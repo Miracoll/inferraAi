@@ -33,20 +33,20 @@ def activateEmail(request, user, to_email):
 def welcomeEmail(request, user, to_email):
     mail_subject = 'Account verification'
     message = render_to_string('account/welcome.html', {
-        'user':user.username,
-        'domain':get_current_site(request).domain,
-        'protocol':'https' if request.is_secure else 'http'
-    }
-    )
-    # email = EmailMessage(mail_subject, message, to=[to_email])
+        'user': user.username,
+        'domain': get_current_site(request).domain,
+        'protocol': 'https' if request.is_secure() else 'http',
+    })
+
     email = EmailMultiAlternatives(mail_subject, message, to=[to_email])
     email.attach_alternative(message, "text/html")
     email.content_subtype = 'html'
-    email.send()
-    if email.send():
-        messages.success(request, f'A verification mail has been sent to {to_email}, pls verify before login')
+
+    sent_count = email.send()
+    if sent_count > 0:
+        messages.success(request, 'Registration successful.')
     else:
-        messages.error(request, f'Problem sending email to {to_email}, please try again')
+        messages.error(request, f'Problem sending email to {to_email}, please try again.')
         
 def telegram(message):
     TOKEN = "8006948716:AAHrcypxchK-fwF1qoXkw46pzU9JBWO4iUY"

@@ -12,6 +12,9 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.utils import timezone
+from django.core.files.base import ContentFile
+from PIL import Image
+from io import BytesIO
 from .decorators import allowed_users
 from .forms import UpdatePhotoForm, IdentityForm, AddressForm, ProveForm
 from .models import Currency, User, TradingPlan, Deposite, MiningPlan, CopiedTrade, ContractPaymentMethod, TakeTrade, Withdrawal
@@ -272,11 +275,14 @@ def crypto(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
 def traders(request):
-    traders = Trader.objects.all()
+    copied_id = []
+    copied = CopiedTrade.objects.filter(user=request.user)
+    for i in copied:
+        copied_id.append(i.trade.id)
+    traders = Trader.objects.exclude(id__in=copied_id)
     if request.method == 'POST':
         hint = request.POST.get('hint')
         traders = Trader.objects.filter(name__contains=hint)
-    copied = CopiedTrade.objects.filter(user=request.user)
     context = {'traders':traders,'copied':copied}
     return render(request, 'account/traders.html',context)
 
@@ -291,6 +297,7 @@ def copyTrade(request, ref):
     getUser = CopiedTrade.objects.get(trade=trader,user=request.user).user.username
     # Send message to admin
     telegram(f'Hello admin, {getUser} just copied a trade',)
+    messages.success(request, 'copied')
     return redirect('traders')
 
 @login_required(login_url='login')
@@ -306,7 +313,7 @@ def cancelTrade(request, ref):
     trade.delete()
     # Send message to admin
     telegram(f'Hello admin, {getUser.user.username} just cancelled a trade',)
-    messages.success(request, 'Successful')
+    messages.success(request, 'Cancelled')
     return redirect('traders')
 
 @login_required(login_url='login')
@@ -357,15 +364,35 @@ def updateEmail(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['client','super'])
 def updatePhoto(request):
-    user= request.user
-    form = UpdatePhotoForm()
+    user = request.user
+    form = UpdatePhotoForm(instance=user)
+    
     if request.method == 'POST':
         form = UpdatePhotoForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
+            photo = request.FILES.get('photo')  # adjust 'photo' to your image field name
+            if photo:
+                # Open the uploaded image
+                img = Image.open(photo)
+                img = img.convert('RGB')  # Ensure it's in RGB format
+                
+                # Resize the image (e.g., max 300x300)
+                max_size = (260, 260)
+                img.thumbnail(max_size)
+
+                # Save the resized image into memory
+                buffer = BytesIO()
+                img.save(buffer, format='JPEG', quality=85)
+                buffer.seek(0)
+
+                # Replace the uploaded file with the resized one
+                form.instance.photo.save(photo.name, ContentFile(buffer.read()), save=False)
+
             form.save()
-            messages.success(request, 'Done')
+            messages.success(request, 'Photo updated successfully.')
             return redirect('updatephoto')
-    context = {'form':form}
+
+    context = {'form': form}
     return render(request, 'account/updatephoto.html', context)
 
 @login_required(login_url='login')

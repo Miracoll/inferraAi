@@ -9,7 +9,7 @@
 
       <div class="fade-appear-done fade-enter-done">
         <center>
-          <img src="{% static 'assets/img/camera.png' %}" class="circle" height="150px">
+          <img src="{{user.image.url}}" class="circle" height="150px">
           <h2>{{user.last_name}} {{user.first_name}}</h2>
           <p>VERIFICATIONS</p>
         </center>

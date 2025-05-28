@@ -14,7 +14,7 @@
 
 
             <div class="col-xxl-4 col-xl-6" style="padding-top: 30px;">
-              <center><img src="{% static 'assets/img/camera.png' %}" class="circle" height="150px">
+              <center><img src="{{user.image.url}}" class="circle" height="150px" width="150px">
                 <h2>{{user.last_name}} {{user.first_name}}</h2>
                 <p>{{user.email}}</p>
               </center>
